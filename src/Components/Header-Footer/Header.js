@@ -4,19 +4,17 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useStore } from "../../Helpers/Store";
 import { signOut, getAuth } from "@firebase/auth";
-import { setUser } from "../../Helpers/userStateReducer";
 
 import { showToastError, showToastSuccess, TeamLogo } from "../Utils/Common";
 
 const Header = () => {
-  const [state, dispatch] = useStore();
+  const [state] = useStore();
   const navigate = useNavigate();
 
   const logoutHandler = () => {
     signOut(getAuth())
       .then(() => {
         showToastSuccess("See ya!");
-        // dispatch(setUser(null));
         navigate("/sign-in", { replace: true });
       })
       .catch((err) => {

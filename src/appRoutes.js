@@ -7,13 +7,8 @@ import Header from "./Components/Header-Footer/Header";
 import Home from "./Components/Home";
 import SignIn from "./Components/SignIn";
 import { AuthGuard } from "./Hoc/Auth";
-import { useStore } from "./Helpers/Store";
 
 const AppRoutes = () => {
-  const [state] = useStore();
-
-  console.log(state.user);
-
   return (
     <BrowserRouter>
       <Header />

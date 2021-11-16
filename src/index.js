@@ -20,7 +20,7 @@ const App = ({ children }) => {
       if (user) dispatch(setUser(user));
       else dispatch(setUser(null));
     });
-  }, []);
+  }, [dispatch]);
 
   return children;
 };

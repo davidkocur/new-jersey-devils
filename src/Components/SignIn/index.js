@@ -5,12 +5,11 @@ import { CircularProgress } from "@mui/material";
 import { signInWithEmailAndPassword, getAuth } from "@firebase/auth";
 import { useNavigate, Navigate } from "react-router";
 import { useStore } from "../../Helpers/Store";
-import { setUser } from "../../Helpers/userStateReducer";
 import { showToastError, showToastSuccess } from "../Utils/Common";
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
-  const [state, dispatch] = useStore();
+  const [state] = useStore();
 
   const navigate = useNavigate();
 
@@ -35,8 +34,7 @@ const SignIn = () => {
   const submitForm = ({ email, password }) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // dispatch(setUser(userCredential.user));
+      .then(() => {
         showToastSuccess("Welcome back!");
         navigate("/dashboard", { replace: true });
       })
