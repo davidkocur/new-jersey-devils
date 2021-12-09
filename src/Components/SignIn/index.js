@@ -7,6 +7,8 @@ import { useNavigate, Navigate } from "react-router";
 import { useStore } from "../../Helpers/Store";
 import { showToastError, showToastSuccess } from "../Utils/Common";
 
+import "./SignIn.css";
+
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [state] = useStore();
@@ -46,7 +48,7 @@ const SignIn = () => {
 
   return !state.user ? (
     <div className="container">
-      <div className="signin_wrapper" style={{ margin: "100px" }}>
+      <div className="signin_wrapper">
         <form onSubmit={formik.handleSubmit}>
           <h2>Plaese login</h2>
           <input

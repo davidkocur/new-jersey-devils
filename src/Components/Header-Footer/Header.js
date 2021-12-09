@@ -3,47 +3,37 @@ import React from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useStore } from "../../Helpers/Store";
-import { signOut, getAuth } from "@firebase/auth";
+import { logoutHandler, TeamLogo } from "../Utils/Common";
 
-import { showToastError, showToastSuccess, TeamLogo } from "../Utils/Common";
+import "./Header-Footer.css";
 
 const Header = () => {
   const [state] = useStore();
   const navigate = useNavigate();
 
-  const logoutHandler = () => {
-    signOut(getAuth())
-      .then(() => {
-        showToastSuccess("See ya!");
-        navigate("/sign-in", { replace: true });
-      })
-      .catch((err) => {
-        showToastError("" + err.message);
-      });
-  };
-
   return (
     <AppBar
       position="fixed"
       style={{
-        backgroundColor: "#98c5e9",
+        backgroundColor: "#C00",
         boxShadow: "none",
-        padding: "10px 0",
-        borderBottom: "2px solid #00285e",
       }}
     >
-      <Toolbar style={{ display: "flex" }}>
-        <div style={{ flexGrow: 1 }}>
-          <div className="header_logo">
-            <TeamLogo linkTo={"/"} width="70px" height="70px" />
-          </div>
-        </div>
+      <div className="header_logo">
+        <TeamLogo linkTo={"/"} width="58px" height="58px" />
+        <h1>New Jersey Devils</h1>
+      </div>
+      <Toolbar style={{ display: "flex", minHeight: "unset", backgroundColor: "#b40000" }}>
         <ButtonLink name="The team" to="/the_team" />
         <ButtonLink name="Matches" to="/the_matches" />
         {state.user && (
           <>
             <ButtonLink name="Dashboard" to="/dashboard" />
-            <Button color="inherit" onClick={logoutHandler}>
+            <Button
+              color="inherit"
+              disableElevation
+              onClick={() => logoutHandler(() => navigate("/sign-in", { replace: true }))}
+            >
               Log Out
             </Button>
           </>
@@ -56,7 +46,9 @@ const Header = () => {
 const ButtonLink = ({ name, to }) => {
   return (
     <Link to={to}>
-      <Button color="inherit">{name}</Button>
+      <Button color="inherit" disableElevation>
+        {name}
+      </Button>
     </Link>
   );
 };

@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
-
-// import { getAnalytics } from 'firebase/analytics';
+import { getFirestore, collection } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApA0lAxx3Y8KzO1trV-wKXlUmqTgX3v9c",
@@ -13,8 +12,42 @@ const firebaseConfig = {
 };
 
 let firebaseApp;
+let db;
+let matchesCollection,
+  playersCollection,
+  positionsCollection,
+  promotionsCollection,
+  teamsCollection;
 
 export function initializeFirebase() {
   firebaseApp = initializeApp(firebaseConfig);
+  db = getFirestore();
+
+  matchesCollection = collection(db, "matches");
+  playersCollection = collection(db, "players");
+  positionsCollection = collection(db, "positions");
+  promotionsCollection = collection(db, "promotions");
+  teamsCollection = collection(db, "teams");
+
+  /* WARNING: Commented out code below will start writing entries into the Database at Firebase
+   *     PROCEED WITH CAUTION !
+   */
+  // cityDb.teams.forEach((item) => {
+  //   addDoc(teamsCollection, item)
+  //     .then((val) => {
+  //       console.log("Doc written with ID: ", val.id);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error adding a document: ", err);
+  //     });
+  // });
 }
-export { firebaseApp };
+
+export {
+  firebaseApp,
+  matchesCollection,
+  playersCollection,
+  positionsCollection,
+  promotionsCollection,
+  teamsCollection,
+};

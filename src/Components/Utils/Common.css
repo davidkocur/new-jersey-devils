@@ -1,0 +1,68 @@
+.match_block .match_date {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.match_block .match_date .thin-line {
+  position: absolute;
+  bottom: 0px;
+  height: 45%;
+  border-top: 2px solid #ffffff;
+}
+.match_block .match_date .thin-line:nth-child(1) {
+  left: 0px;
+  width: 8px;
+}
+.match_block .match_date .thin-line:nth-child(2) {
+  right: -47px;
+  width: 40px;
+}
+
+.match_block .match_wrapper .match_top,
+.match_block .match_wrapper .match_bottom {
+  display: flex;
+}
+.match_block .match_wrapper .match_bottom {
+  margin-top: 5px;
+}
+
+.match_block .match_wrapper .match_top .left,
+.match_block .match_wrapper .match_bottom .left {
+  background: #ffffff;
+  font-family: "Exo", sans-serif;
+  flex-grow: 1;
+  margin-right: 5px;
+  padding: 10px;
+}
+
+.match_block .match_wrapper .match_top .left div,
+.match_block .match_wrapper .match_bottom .left div {
+  float: left;
+}
+
+.match_block .match_wrapper .match_top .left .icon,
+.match_block .match_wrapper .match_bottom .left .icon {
+  width: 50px;
+  height: 50px;
+  background-size: cover !important;
+}
+.match_block .match_wrapper .match_top .left .team_name,
+.match_block .match_wrapper .match_bottom .left .team_name {
+  font-size: 30px;
+  padding: 6px 10px;
+}
+
+.match_block .match_wrapper .match_top .right,
+.match_block .match_wrapper .match_bottom .right {
+  background: #310e1b;
+  width: 70px;
+  color: #ffffff;
+  font-size: 50px;
+  text-align: center;
+  padding-top: 6px;
+}

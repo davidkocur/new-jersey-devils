@@ -1,0 +1,79 @@
+.promotion_wrapper {
+  padding: 30px 0px 130px 0px;
+  background: #f3e1e5;
+}
+
+.promotion_wrapper .promotion_animation {
+  display: flex;
+  padding: 80px 0px 30px 0px;
+}
+
+.promotion_wrapper .promotion_animation .left {
+  text-transform: uppercase;
+  text-transform: uppercase;
+  font-size: 150px;
+  font-family: "Exo", sans-serif;
+  flex-grow: 1;
+  color: #ffffff;
+  line-height: 135px;
+}
+.promotion_wrapper .promotion_animation .left span {
+  display: block;
+}
+
+.promotion_wrapper .promotion_animation .right {
+  line-height: 135px;
+}
+
+.promotion_wrapper .promotion_animation .right div {
+  width: 280px;
+  height: 280px;
+  background-size: contain !important;
+}
+
+.promotion_wrapper .enroll_wrapper {
+  text-align: center;
+}
+
+.promotion_wrapper .enroll_title {
+  font-family: "Exo", sans-serif;
+  font-size: 26px;
+  color: #4e4e4e;
+}
+
+.promotion_wrapper .enroll_discl {
+  font-weight: 300;
+  font-size: 12px;
+  width: 271px;
+  margin: 0 auto;
+  padding: 10px 0px;
+}
+
+.promotion_wrapper .enroll_input {
+  width: 330px;
+  margin: 0 auto;
+  padding: 10px 0px;
+}
+
+.promotion_wrapper .enroll_input .progress {
+  margin-top: 20px;
+}
+
+.promotion_wrapper .enroll_input input {
+  display: inline-block;
+  width: 100%;
+  padding: 7px 0;
+  font-size: 16px;
+  text-align: center;
+  color: #333;
+  background-color: #f6f6f6;
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+}
+.promotion_wrapper .enroll_input input::placeholder {
+  color: #aaa;
+}
+
+.promotion_wrapper .jersey {
+  background: url("../../../resources/images/jersey.png") no-repeat;
+}

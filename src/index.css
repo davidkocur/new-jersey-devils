@@ -1,0 +1,116 @@
+/* @font-face {
+  font-family: "Bahnschrift";
+  src: url("./resources/font/bahnschrift.woff2") format("woff2 supports variations"),
+    url("./resources/font/bahnschrift.woff2") format("woff2-variations");
+  font-stretch: 100%;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+} */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+select {
+  font-size: 16px;
+  height: 38px;
+  border: 1px solid #e9e9e9;
+  border-radius: 3px;
+  width: 100%;
+}
+
+button {
+  background: #0d1831;
+  color: #ffffff;
+  border: 1px solid #0d1831;
+  padding: 5px 10px;
+  margin-top: 10px;
+  font-size: 15px;
+  border-radius: 3px;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #cecece;
+  text-align: center;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #cecece;
+  text-align: center;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #cecece;
+  text-align: center;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #cecece;
+  text-align: center;
+}
+
+.bck_black {
+  background: #111;
+}
+
+.bck_red {
+  background: #c00;
+}
+
+.img_cover {
+  background-size: cover !important;
+}
+.container {
+  width: 1024px;
+  margin: 0 auto;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+.error_label {
+  color: #f44336;
+  font-weight: 600;
+  margin: 10px 0px;
+}
+
+.success_label {
+  color: #c00;
+  font-weight: 600;
+  margin: 10px 0px;
+}

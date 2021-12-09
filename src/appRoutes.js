@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Dashboard from "./Components/Admin/Dashboard";
+import AdminPlayers from "./Components/Admin/Players";
 import Footer from "./Components/Header-Footer/Footer";
 import Header from "./Components/Header-Footer/Header";
 import Home from "./Components/Home";
@@ -14,6 +15,14 @@ const AppRoutes = () => {
       <Header />
       <Routes>
         <Route path="/*" element={<Home />} />
+        <Route
+          path="/admin-players"
+          element={
+            <AuthGuard>
+              <AdminPlayers />
+            </AuthGuard>
+          }
+        />
         <Route
           path="/dashboard"
           element={

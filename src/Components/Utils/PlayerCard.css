@@ -1,0 +1,37 @@
+.player-card-wrapper {
+  position: relative;
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+  margin-bottom: 42px;
+  padding: 10px 15px;
+  color: #1b1b1b;
+  background-color: #efefef;
+  font-size: 48px;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.player-card-img {
+  display: inline-block;
+  width: 96px;
+  height: 96px;
+  background-color: white;
+  border-radius: 999px;
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.07), 0 4px 3px rgba(0, 0, 0, 0.12);
+}
+
+.player-card-name {
+  display: inline-block;
+  padding-top: 10px;
+}
+
+.player-card-number {
+  position: absolute;
+  top: -32px;
+  right: 40px;
+  font-family: "Exo";
+  font-size: 51px;
+  font-weight: 800;
+  color: #e02727;
+}

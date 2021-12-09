@@ -6,7 +6,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { StoreProvider, useStore } from "./Helpers/Store";
 import { initialState, setUser, userStateReducer } from "./Helpers/userStateReducer";
 
-import "./resources/css/app.css";
+import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 
 initializeFirebase();

@@ -1,7 +1,18 @@
 import React from "react";
+import Featured from "./Featured";
+import Matches from "./Matches";
+import MeetPlayers from "./MeetPlayers";
+import Promotion from "./Promotion";
 
 const Home = () => {
-  return <div></div>;
+  return (
+    <div className="bck_black">
+      <Featured />
+      <Matches />
+      <MeetPlayers />
+      <Promotion />
+    </div>
+  );
 };
 
 export default Home;
