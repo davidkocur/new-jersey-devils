@@ -19,7 +19,7 @@ const Matches = () => {
           Matches
         </TagAnim>
         <Blocks />
-        <Tag linkTo="/the_team" style={{ fontSize: "22px", color: "#0e1731" }}>
+        <Tag linkTo="/leaderboards" style={{ fontSize: "22px", color: "#0e1731" }}>
           Matches
         </Tag>
       </div>

@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApA0lAxx3Y8KzO1trV-wKXlUmqTgX3v9c",
@@ -13,6 +14,7 @@ const firebaseConfig = {
 
 let firebaseApp;
 let db;
+let storage;
 let matchesCollection,
   playersCollection,
   positionsCollection,
@@ -22,13 +24,13 @@ let matchesCollection,
 export function initializeFirebase() {
   firebaseApp = initializeApp(firebaseConfig);
   db = getFirestore();
+  storage = getStorage(firebaseApp);
 
   matchesCollection = collection(db, "matches");
   playersCollection = collection(db, "players");
   positionsCollection = collection(db, "positions");
   promotionsCollection = collection(db, "promotions");
   teamsCollection = collection(db, "teams");
-
   /* WARNING: Commented out code below will start writing entries into the Database at Firebase
    *     PROCEED WITH CAUTION !
    */
@@ -45,6 +47,7 @@ export function initializeFirebase() {
 
 export {
   firebaseApp,
+  storage,
   matchesCollection,
   playersCollection,
   positionsCollection,

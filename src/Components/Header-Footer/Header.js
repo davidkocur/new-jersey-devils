@@ -24,8 +24,8 @@ const Header = () => {
         <h1>New Jersey Devils</h1>
       </div>
       <Toolbar style={{ display: "flex", minHeight: "unset", backgroundColor: "#b40000" }}>
-        <ButtonLink name="The team" to="/the_team" />
-        <ButtonLink name="Matches" to="/the_matches" />
+        <ButtonLink name="The team" to="/the-team" />
+        <ButtonLink name="Matches" to="/leaderboards" />
         {state.user && (
           <>
             <ButtonLink name="Dashboard" to="/dashboard" />

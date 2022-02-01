@@ -1,3 +1,11 @@
+.user_dashboard {
+  font-size: 60px;
+  font-family: "Exo", sans-serif;
+  color: #ecafaf;
+  text-align: center;
+  margin-top: 200px;
+}
+
 .admin_container {
   margin-top: 120px;
   display: flex;
@@ -29,14 +37,18 @@
   margin: 20px 0px;
 }
 
-.admin_container .matches_tag_red {
+.admin_container .matches-tag-red {
   font-weight: 700;
   color: #f44336;
 }
 
-.admin_container .matches_tag_green {
+.admin_container .matches-tag-green {
   font-weight: 700;
   color: #4caf50;
+}
+
+.admin_container .tag-uppercase {
+  text-transform: uppercase;
 }
 
 .admin_container h2 {

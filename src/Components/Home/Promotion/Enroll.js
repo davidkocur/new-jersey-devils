@@ -46,7 +46,7 @@ const Enroll = () => {
   };
 
   return (
-    <Fade>
+    <Fade triggerOnce>
       <div className="enroll_wrapper">
         <form onSubmit={formik.handleSubmit}>
           <div className="enroll_title">Enter your email</div>

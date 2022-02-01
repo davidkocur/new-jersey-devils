@@ -66,3 +66,17 @@
   text-align: center;
   padding-top: 6px;
 }
+
+.image_upload_container {
+  position: relative;
+  width: 200px;
+}
+
+.image_upload_container .remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px;
+  color: #c00;
+  cursor: pointer;
+}

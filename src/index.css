@@ -102,6 +102,18 @@ li {
 .mb-5 {
   margin-bottom: 5px;
 }
+.mt-12 {
+  margin-top: 12px;
+}
+.mb-12 {
+  margin-bottom: 12px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
 
 .error_label {
   color: #f44336;
@@ -113,4 +125,43 @@ li {
   color: #c00;
   font-weight: 600;
   margin: 10px 0px;
+}
+
+.progress {
+  display: block !important;
+  margin: 16px auto !important;
+}
+
+.full_height_wrapper {
+  margin-top: 120px;
+  min-height: calc(100vh - 293px);
+}
+
+.not_found_container {
+  padding: 20px;
+  padding-top: 80px;
+  background-size: 5px 5px !important;
+  text-align: center;
+  font-size: 56px;
+  font-family: "Exo", sans-serif;
+  color: #ecafaf;
+}
+
+.not_found_container h1 {
+  display: inline-block;
+  margin-bottom: 92px;
+}
+
+.not_found_container p {
+  margin: 0;
+  margin-bottom: 32px;
+  color: #3b3b3b;
+}
+
+.not_found_container svg {
+  display: inline-block;
+  margin-left: 21px;
+  padding-bottom: 28px;
+  font-size: 148px;
+  vertical-align: middle;
 }

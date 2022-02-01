@@ -1,5 +1,4 @@
 import React from "react";
-import { enterTransition } from "../../Utils/transitions";
 
 import TatarJPG from "../../../resources/images/players/tatar.jpg";
 import ZachaJPG from "../../../resources/images/players/zacha.jpg";

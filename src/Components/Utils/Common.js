@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 
 import logoImage from "../../resources/images/logos/team-logo.svg";
 import "./Common.css";
+import FormHelperText from "@mui/material/FormHelperText";
+import { useState } from "react";
 
 /*=============================
          COMPONENTS
@@ -97,4 +99,38 @@ export const logoutHandler = (onSuccess) => {
     .catch((err) => {
       showToastError("" + err.message);
     });
+};
+
+export const formikTextErrorHelper = (formik, value) => ({
+  error: formik.errors[value] && formik.touched[value],
+  helperText: formik.errors[value],
+});
+
+export const formikSelectErrorHelper = (formik, value) => {
+  return (
+    formik.errors[value] &&
+    formik.touched[value] && <FormHelperText>{formik.errors[value]}</FormHelperText>
+  );
+};
+
+export function debounce(func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
+}
+
+export const useDebouncedInput = ({ defaultText = "", debounceTime = 1000 }) => {
+  const [text, setText] = useState(defaultText);
+  const [t, setT] = useState(null);
+
+  const onChange = (text) => {
+    if (t) clearTimeout(t);
+    setT(setTimeout(() => setText(text), debounceTime));
+  };
+
+  return [text, onChange];
 };

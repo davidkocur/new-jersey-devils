@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { Fade } from "react-awesome-reveal";
 import { TagAnim } from "../../Utils/Animated";
 import { Tag } from "../../Utils/Common";
-import Cards from "./Cards";
-import Leaderboard from "./Leaderboard";
+import Rooster from "./Rooster";
 
 import "./MeetPlayers.css";
 
@@ -44,11 +42,11 @@ const MeetPlayers = () => {
           >
             <Cards doAnimation={isVisible} />
           </Fade> */}
-          <Leaderboard />
+          <Rooster />
           <div className="home_text_wrapper">
             <div>{renderTextTag("Meet", 0.3)}</div>
-            <div>{renderTextTag("The", 0.45)}</div>
-            <div>{renderTextTag("Players", 0.6)}</div>
+            <div>{renderTextTag("The", 0.3)}</div>
+            <div>{renderTextTag("Players", 0.3)}</div>
             <div>
               <Tag
                 linkTo="/the-team"

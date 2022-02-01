@@ -47,8 +47,8 @@ const SignIn = () => {
   };
 
   return !state.user ? (
-    <div className="container">
-      <div className="signin_wrapper">
+    <div className="container full_height_wrapper">
+      <div className="signin_container">
         <form onSubmit={formik.handleSubmit}>
           <h2>Plaese login</h2>
           <input
@@ -73,7 +73,6 @@ const SignIn = () => {
           {formik.touched.password && formik.errors.password ? (
             <div className="error_label">{formik.errors.password}</div>
           ) : null}
-
           {loading ? (
             <CircularProgress color="secondary" className="progress" />
           ) : (

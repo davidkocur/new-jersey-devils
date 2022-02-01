@@ -1,0 +1,26 @@
+.the_team_container {
+  background-color: #111111;
+  margin-top: 96px;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.team_category_wrapper .title {
+  font-size: 90px;
+  margin: 45px 0px;
+  font-family: "Exo", cursive;
+  font-weight: bold;
+  color: #c71824;
+}
+.team_category_wrapper {
+  /* min-height: 600px; */
+  margin-bottom: 100px;
+}
+.team_category_wrapper .team_cards {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 40px;
+  row-gap: 50px;
+}
+.team_category_wrapper .team_cards .item {
+}

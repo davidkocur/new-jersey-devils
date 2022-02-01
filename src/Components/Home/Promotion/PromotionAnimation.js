@@ -5,7 +5,7 @@ const PromotionAnimation = () => {
   return (
     <div className="promotion_animation">
       <div className="left">
-        <Zoom>
+        <Zoom triggerOnce>
           <div>
             <span>Win a</span>
             <span>Jersey</span>
@@ -13,7 +13,7 @@ const PromotionAnimation = () => {
         </Zoom>
       </div>
       <div className="right">
-        <Zoom>
+        <Zoom triggerOnce>
           <div className="jersey"></div>
         </Zoom>
       </div>
