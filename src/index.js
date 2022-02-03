@@ -5,6 +5,8 @@ import { initializeFirebase } from "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { StoreProvider, useStore } from "./Helpers/Store";
 import { initialState, setUser, userStateReducer } from "./Helpers/userStateReducer";
+import { LocalizationProvider } from "@mui/lab";
+import DateAdapter from "@mui/lab/AdapterDateFns";
 
 import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,9 +30,11 @@ const App = ({ children }) => {
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider reducer={userStateReducer} initialState={initialState}>
-      <App>
-        <AppRoutes />
-      </App>
+      <LocalizationProvider dateAdapter={DateAdapter}>
+        <App>
+          <AppRoutes />
+        </App>
+      </LocalizationProvider>
     </StoreProvider>
   </React.StrictMode>,
   document.getElementById("root")

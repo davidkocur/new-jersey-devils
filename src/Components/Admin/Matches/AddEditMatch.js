@@ -22,6 +22,8 @@ import {
 } from "../../Utils/Common";
 import { getDocs, doc, getDoc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { teamsCollection, matchesCollection } from "../../../firebase";
+import { DatePicker } from "@mui/lab";
+import { formatISO } from "date-fns";
 
 const defaultFormValues = {
   date: "",
@@ -30,6 +32,8 @@ const defaultFormValues = {
   away: "",
   resultAway: "",
   stadium: "",
+  bestWinning: "",
+  bestLosing: "",
   result: "",
   final: "",
 };
@@ -103,6 +107,8 @@ const AddEditMatch = () => {
         .min(0, messages.wrongNumber)
         .max(99, messages.wrongNumber),
       stadium: Yup.string().required(messages.required),
+      bestWinning: Yup.string().required(messages.required),
+      bestLosing: Yup.string().required(messages.required),
       result: Yup.mixed().required(messages.required).oneOf(["w", "l", "n/a"]),
       final: Yup.mixed().required(messages.required).oneOf(["st", "ot", "so", "np"]),
     }),
@@ -116,10 +122,8 @@ const AddEditMatch = () => {
       </MenuItem>
     ));
 
-  const onDateChanged = (e) => {
-    const { value } = e.target;
-
-    if (new Date(value).getTime() > Date.now()) {
+  const onDateChanged = (date) => {
+    if (date.getTime() > Date.now()) {
       formik.setFieldValue("result", "n/a");
       formik.setFieldValue("final", "np");
       formik.setFieldValue("resultLocal", 0);
@@ -201,14 +205,31 @@ const AddEditMatch = () => {
         <form onSubmit={formik.handleSubmit}>
           <div>
             <h4>Select date</h4>
-            <FormControl className="mb-5" onChange={onDateChanged}>
-              <TextField
+            <FormControl className="mb-5">
+              {/* <TextField
                 id="date"
                 name="date"
                 type="date"
                 variant="outlined"
+                
                 {...formik.getFieldProps("date")}
                 {...formikTextErrorHelper(formik, "date")}
+              /> */}
+              <DatePicker
+                label="Match date"
+                id="date"
+                name="date"
+                type="date"
+                value={formik.values.date}
+                onChange={(value) => {
+                  // console.log(value);
+                  if (isNaN(value.getTime())) return;
+                  formik.setFieldValue("date", formatISO(value, { representation: "date" }));
+                  onDateChanged(value);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} {...formikTextErrorHelper(formik, "date")} />
+                )}
               />
             </FormControl>
           </div>
@@ -291,6 +312,32 @@ const AddEditMatch = () => {
             </div>
 
             <div className="mb-5">
+              <FormControl>
+                <TextField
+                  id="bestWinning"
+                  name="bestWinning"
+                  variant="outlined"
+                  placeholder="Best of winning team"
+                  {...formik.getFieldProps("bestWinning")}
+                  {...formikTextErrorHelper(formik, "bestWinning")}
+                />
+              </FormControl>
+            </div>
+
+            <div className="mb-5">
+              <FormControl>
+                <TextField
+                  id="bestLosing"
+                  name="bestLosing"
+                  variant="outlined"
+                  placeholder="Best of losing team"
+                  {...formik.getFieldProps("bestLosing")}
+                  {...formikTextErrorHelper(formik, "bestLosing")}
+                />
+              </FormControl>
+            </div>
+
+            <div className="mb-5">
               <FormControl error={formik.errors.result && formik.touched.result}>
                 <Select
                   id="result"
@@ -320,7 +367,7 @@ const AddEditMatch = () => {
                   {...formik.getFieldProps("final")}
                 >
                   <MenuItem value="" disabled>
-                    Match ended in ...
+                    Select match final
                   </MenuItem>
                   <MenuItem value="st" children="Standard time" />
                   <MenuItem value="ot" children="Overtime" />

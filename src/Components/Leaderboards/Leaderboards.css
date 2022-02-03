@@ -27,29 +27,36 @@
 *************************/
 
 .match_box_big {
-  display: block;
-  width: 100%;
-  border-bottom: 2px solid #98c6e9;
-  padding: 20px;
-  box-sizing: border-box;
-  height: 143px;
-  clear: both;
-}
-
-.match_box_big .info_wrapper {
-  display: inline-block;
-  margin-right: 50px;
-  float: left;
-}
-
-.match_box_big .block {
   display: flex;
+  align-items: center;
+  height: 143px;
+  padding: 20px;
+  border-bottom: 2px solid #d8d8d8;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.match_box_big .results_wrapper {
+  margin-right: 4rem;
+}
+
+.match_box_big .block div {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.match_box_big .block:nth-child(1) {
+  margin-bottom: 4px;
 }
 
 .match_box_big .icon {
   width: 60px;
   height: 40px;
   background-size: cover !important;
+}
+
+.match_box_big .block .team {
+  min-width: 10ch;
 }
 
 .match_box_big .block .team,
@@ -68,19 +75,40 @@
   font-weight: 500;
 }
 
-.info_wrapper.nfo {
-  border-left: 1px solid #98c6e9;
-  height: 102px;
-  padding-left: 10px;
-  font-weight: 300;
-  color: #5e5e5e;
+.match_box_big .final-wrapper {
+  min-width: 9ch;
+  margin-right: 1.2rem;
+  font-size: 1.45rem;
+  text-align: right;
 }
 
-.info_wrapper.nfo div {
+.match_box_big .final-wrapper .final {
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase;
+}
+.match_box_big .final-wrapper .final span {
+  font-size: 0.85rem;
+  color: #555;
+}
+.match_box_big .final-wrapper .final.np {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.match_box_big .details {
+  border-left: 1px solid #d1545a;
+  height: 102px;
+  padding-left: 16px;
+  font-weight: 300;
+  color: #5a5a5a;
+}
+
+.match_box_big .details div {
   margin: 5px 0px;
 }
 
-.info_wrapper.nfo strong {
+.match_box_big .details strong {
   font-weight: bold;
 }
 
@@ -90,33 +118,33 @@
 
 .match_filters {
   display: flex;
-  border-bottom: 1px solid #01285e;
-  background: #dff1ff;
+  /* border-bottom: 1px solid #01285e; */
+  background: #232323;
 }
 .match_filters .tag {
-  margin-bottom: 5px;
+  margin-bottom: 0.4rem;
   font-size: 1rem;
   font-weight: 300;
-  color: #656565;
+  color: #aaa;
 }
 .match_filters .option {
-  background: #ffffff;
-  padding: 5px 9px;
+  background: #555;
+  color: #fff;
+  padding: 0.35rem 0.65rem;
   border-radius: 3px;
   font-size: 13px;
-  margin-right: 5px;
+  margin-right: 7px;
   cursor: pointer;
 }
 
 .match_filters .option.active {
-  background: #62a2d3;
-  color: #fff;
+  background: #b40000;
 }
 
 .match_filters_box {
-  padding: 10px 20px;
-  border-right: 1px solid #01285e;
-  background: #dff1ff;
+  padding: 0.9rem 2rem 1.1rem 2rem;
+  /* border-right: 1px solid #01285e; */
+  background: #232323;
 }
 
 .match_filters .cont {
@@ -128,15 +156,15 @@
 *************************/
 
 .league_table_wrapper {
-  border-left: 1px solid #98c6e9;
-  background: #98c6e9;
+  /* border-left: 1px solid #98c6e9; */
+  background: #b4a2a4;
 }
 .league_table_wrapper .title {
-  padding: 22px;
+  padding: 1.8rem 1.5rem;
   font-size: 22px;
-  color: #ffffff;
-  background: #98c6e9;
-  border-bottom: 1px solid #01285e;
+  color: #efefef;
+  background: #232323;
+  /* border-bottom: 1px solid #01285e; */
 }
 
 .the_matches_wrapper .progress {

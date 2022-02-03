@@ -65,7 +65,7 @@ export const MatchBlock = ({ match }) => {
           <div className="left">
             <div
               className="icon"
-              style={{ background: `url(/images/team_icons/${match.localThmb}.png)` }}
+              style={{ background: `url(/images/team-icons/${match.localThmb}.svg)` }}
             />
             <div className="team_name">{match.local}</div>
           </div>
@@ -75,7 +75,7 @@ export const MatchBlock = ({ match }) => {
           <div className="left">
             <div
               className="icon"
-              style={{ background: `url(/images/team_icons/${match.awayThmb}.png)` }}
+              style={{ background: `url(/images/team-icons/${match.awayThmb}.svg)` }}
             />
             <div className="team_name">{match.away}</div>
           </div>

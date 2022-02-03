@@ -1,10 +1,6 @@
+import { format } from "date-fns";
 import { motion, AnimatePresence } from "framer-motion";
 import React from "react";
-
-const listVariants = {
-  hidden: { transition: { staggerChildren: 0.15 } },
-  visible: { transition: { staggerChildren: 0.15 } },
-};
 
 const itemVariants = {
   hidden: {
@@ -27,6 +23,48 @@ const itemVariants = {
 };
 
 const MatchesList = ({ matches }) => {
+  const getDateFormat = (date) => {
+    const matchDate = new Date(date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const deltaMillis = matchDate - today;
+    const dayInMillis = 86400000 - 1;
+
+    if (Math.abs(deltaMillis) < dayInMillis) return "Today at 20:00";
+    else if (Math.abs(deltaMillis) < dayInMillis * 2)
+      return deltaMillis < 0 ? "Yesterday" : "Tomorrow at 19:00";
+    else if (Math.abs(deltaMillis) < dayInMillis * 6)
+      return deltaMillis < 0
+        ? format(matchDate, "d MMM yyyy")
+        : format(matchDate, "d MMM yy (eeee)");
+    else return format(matchDate, "d MMM yyyy");
+  };
+
+  const renderFinalText = (finalCode) => {
+    switch (finalCode) {
+      case "st":
+        return <p className={`final ${finalCode}`}>Final</p>;
+      case "ot":
+        return (
+          <p className={`final ${finalCode}`}>
+            Final
+            <br />
+            <span>Overtime</span>
+          </p>
+        );
+      case "so":
+        return (
+          <p className={`final ${finalCode}`}>
+            Final
+            <br />
+            <span>Shootout</span>
+          </p>
+        );
+      default:
+        return <p className={`final ${finalCode}`}>Upcomming</p>;
+    }
+  };
+
   return (
     <ul>
       <AnimatePresence>
@@ -40,14 +78,14 @@ const MatchesList = ({ matches }) => {
             exit="hidden"
             custom={index}
           >
-            <div className="info_wrapper">
+            <div className="results_wrapper">
               <div className={`block ${match.resultLocal < match.resultAway ? "lost" : ""}`}>
                 <div
                   className="icon"
                   style={{ background: `url(/images/team-icons/${match.localThmb}.svg)` }}
                 />
                 <div className="team">{match.local}</div>
-                <div className="result">{match.resultLocal}</div>
+                <div className="result">{match.played ? match.resultLocal : "-"}</div>
               </div>
               <div className={`block ${match.resultLocal > match.resultAway ? "lost" : ""}`}>
                 <div
@@ -55,22 +93,27 @@ const MatchesList = ({ matches }) => {
                   style={{ background: `url(/images/team-icons/${match.awayThmb}.svg)` }}
                 />
                 <div className="team">{match.away}</div>
-                <div className="result">{match.resultAway}</div>
+                <div className="result">{match.played ? match.resultAway : "-"}</div>
               </div>
             </div>
-            <div className="info_wrapper nfo">
+            <div className="final-wrapper">{renderFinalText(match.final)}</div>
+            <div className="details">
               <div>
-                <strong>Date:</strong>&nbsp;
-                {match.date}
+                Date:&nbsp;
+                <strong>{getDateFormat(match.date)}</strong>
               </div>
               <div>
-                <strong>Stadium:</strong>&nbsp;
-                {match.stadium}
+                Stadium:&nbsp;
+                <strong>{match.stadium}</strong>
               </div>
-              {/* <div>
-                <strong>Referee:</strong>&nbsp;
-                {match.referee}
-              </div> */}
+              <div>
+                W:&nbsp;
+                <strong>{match.bestWinning}</strong>
+              </div>
+              <div>
+                L:&nbsp;
+                <strong>{match.bestLosing}</strong>
+              </div>
             </div>
           </motion.li>
         ))}

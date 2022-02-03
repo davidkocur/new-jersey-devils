@@ -47,8 +47,9 @@
 
 .match_block .match_wrapper .match_top .left .icon,
 .match_block .match_wrapper .match_bottom .left .icon {
-  width: 50px;
-  height: 50px;
+  width: 68px;
+  height: 44px;
+  margin: 3px 0;
   background-size: cover !important;
 }
 .match_block .match_wrapper .match_top .left .team_name,
