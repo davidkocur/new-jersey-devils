@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-import AppRoutes from "./AppRoutes";
+import AppRoutes from "./appRoutes";
 import { initializeFirebase } from "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { StoreProvider, useStore } from "./Helpers/Store";
