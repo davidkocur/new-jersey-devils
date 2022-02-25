@@ -1,16 +1,17 @@
 import React from "react";
 import Enroll from "./Enroll";
 import PromotionAnimation from "./PromotionAnimation";
+import Container from "@mui/material/Container";
 
 import "./Promotion.css";
 
 const Promotion = () => {
   return (
     <div className="promotion_wrapper">
-      <div className="container">
+      <Container maxWidth="lg">
         <PromotionAnimation />
         <Enroll />
-      </div>
+      </Container>
     </div>
   );
 };

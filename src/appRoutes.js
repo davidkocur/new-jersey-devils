@@ -14,6 +14,7 @@ import Team from "./Components/Team";
 import { AuthGuard } from "./Hoc/Auth";
 import Leaderboards from "./Components/Leaderboards";
 import NotFound from "./Components/NotFound";
+import FormTest from "./Components/FormTest";
 
 const AppRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/form-test" element={<FormTest />} />
         <Route
           path="/admin-players/add-player"
           element={

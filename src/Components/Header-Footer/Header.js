@@ -19,8 +19,8 @@ const Header = () => {
         boxShadow: "none",
       }}
     >
-      <div className="header_logo">
-        <TeamLogo linkTo={"/"} width="58px" height="58px" />
+      <div className="header-logo">
+        <TeamLogo linkTo={"/"} width="100%" height="100%" />
         <h1>New Jersey Devils</h1>
       </div>
       <Toolbar style={{ display: "flex", minHeight: "unset", backgroundColor: "#b40000" }}>

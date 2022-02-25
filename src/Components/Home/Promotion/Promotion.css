@@ -10,7 +10,6 @@
 
 .promotion_wrapper .promotion_animation .left {
   text-transform: uppercase;
-  text-transform: uppercase;
   font-size: 150px;
   font-family: "Exo", sans-serif;
   flex-grow: 1;
@@ -73,7 +72,24 @@
 .promotion_wrapper .enroll_input input::placeholder {
   color: #aaa;
 }
+.promotion_wrapper .enroll_input input:focus {
+  outline: 1px solid #303030;
+}
 
 .promotion_wrapper .jersey {
   background: url("../../../resources/images/jersey.png") no-repeat;
+}
+
+@media screen and (max-width: 1024px) {
+  .promotion_wrapper .promotion_animation .left {
+    font-size: 116px;
+    line-height: 108px;
+  }
+  .promotion_wrapper .promotion_animation .right {
+    line-height: 108px;
+  }
+  .promotion_wrapper .promotion_animation .right div {
+    width: 240px;
+    height: 240px;
+  }
 }

@@ -2,7 +2,7 @@ import { CircularProgress } from "@mui/material";
 import { getDocs } from "firebase/firestore";
 import React, { useEffect, useState, useReducer } from "react";
 import { matchesCollection } from "../../firebase";
-import { showToastError } from "../Utils/Common";
+import { showToastError, sortMatchesByDate } from "../Utils/Common";
 import LeagueTable from "./LeagueTable";
 import MatchesList from "./MatchesList";
 
@@ -35,7 +35,13 @@ const Leaderboards = () => {
 
       getDocs(matchesCollection)
         .then((snapshot) => {
-          const tempMatches = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+          const tempMatches = snapshot.docs
+            .map((doc) => {
+              const theData = doc.data();
+              return { ...theData, id: doc.id, date: new Date(theData.date) };
+            })
+            .sort(sortMatchesByDate);
+
           setMatches(tempMatches);
           dispatch({ ...state, filteredMatches: tempMatches });
         })

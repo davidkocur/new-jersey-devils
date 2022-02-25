@@ -74,3 +74,6 @@
 .player-card-content-wrapper > h5 {
   margin: 0;
 }
+
+@media screen and (max-width: 960px) {
+}

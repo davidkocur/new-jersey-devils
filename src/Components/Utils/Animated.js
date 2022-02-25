@@ -28,7 +28,7 @@ const tagAnimations = {
   }),
 };
 
-export const TagAnim = ({ children, linkTo, style, animStyle, delay }) => {
+export const TagAnim = ({ children, linkTo, className, style, animStyle, delay }) => {
   const containerRef = useRef(null);
   const [isInViewport, setInViewport] = useState(false);
   useEffect(() => {
@@ -52,6 +52,7 @@ export const TagAnim = ({ children, linkTo, style, animStyle, delay }) => {
         overflow: "hidden",
         ...style,
       }}
+      className={className || ""}
       ref={containerRef}
     >
       <motion.h3

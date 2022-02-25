@@ -1,3 +1,4 @@
+import { Container } from "@mui/material";
 import React from "react";
 import { TagAnim } from "../../Utils/Animated";
 import { Tag } from "../../Utils/Common";
@@ -8,7 +9,7 @@ import "./Matches.css";
 const Matches = () => {
   return (
     <div className="home_matches_wrapper">
-      <div className="container">
+      <Container maxWidth="lg">
         {/* <Tag style={{ backgroundColor: "#720000", fontSize: "50px", color: "#ffffff" }}>
           Matches
         </Tag> */}
@@ -22,7 +23,7 @@ const Matches = () => {
         <Tag linkTo="/leaderboards" style={{ fontSize: "22px", color: "#0e1731" }}>
           Matches
         </Tag>
-      </div>
+      </Container>
     </div>
   );
 };

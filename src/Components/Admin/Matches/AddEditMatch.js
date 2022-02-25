@@ -19,11 +19,12 @@ import {
   formikTextErrorHelper,
   showToastError,
   showToastSuccess,
+  TextFieldDebounced,
 } from "../../Utils/Common";
 import { getDocs, doc, getDoc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { teamsCollection, matchesCollection } from "../../../firebase";
 import { DatePicker } from "@mui/lab";
-import { formatISO } from "date-fns";
+import { formatISO, isToday, isFuture } from "date-fns";
 
 const defaultFormValues = {
   date: "",
@@ -47,6 +48,7 @@ const AddEditMatch = () => {
   const [loading, setLoading] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [formValues, setFormValues] = useState(defaultFormValues);
+  const [futureDate, setFutureDate] = useState(false);
   const [teams, setTeams] = useState([]);
 
   const [matchDocRef, setMatchDocRef] = useState(null);
@@ -93,25 +95,35 @@ const AddEditMatch = () => {
 
   const formik = useFormik({
     enableReinitialize: true,
+    validateOnBlur: true,
     initialValues: formValues,
-    validationSchema: Yup.object({
-      date: Yup.string().required(messages.required),
-      local: Yup.string().required(messages.required),
-      resultLocal: Yup.number()
-        .required(messages.required)
-        .min(0, messages.wrongNumber)
-        .max(99, messages.wrongNumber),
-      away: Yup.string().required(messages.required),
-      resultAway: Yup.number()
-        .required(messages.required)
-        .min(0, messages.wrongNumber)
-        .max(99, messages.wrongNumber),
-      stadium: Yup.string().required(messages.required),
-      bestWinning: Yup.string().required(messages.required),
-      bestLosing: Yup.string().required(messages.required),
-      result: Yup.mixed().required(messages.required).oneOf(["w", "l", "n/a"]),
-      final: Yup.mixed().required(messages.required).oneOf(["st", "ot", "so", "np"]),
-    }),
+    validationSchema: () => {
+      const inFuture = Yup.object({
+        date: Yup.string().required(messages.required),
+        local: Yup.string().required(messages.required),
+        away: Yup.string().required(messages.required),
+        stadium: Yup.string().required(messages.required),
+      });
+      const inThePast = Yup.object({
+        date: Yup.string().required(messages.required),
+        local: Yup.string().required(messages.required),
+        resultLocal: Yup.number()
+          .required(messages.required)
+          .min(0, messages.wrongNumber)
+          .max(99, messages.wrongNumber),
+        away: Yup.string().required(messages.required),
+        resultAway: Yup.number()
+          .required(messages.required)
+          .min(0, messages.wrongNumber)
+          .max(99, messages.wrongNumber),
+        stadium: Yup.string().required(messages.required),
+        bestWinning: Yup.string().required(messages.required),
+        bestLosing: Yup.string().required(messages.required),
+        result: Yup.mixed().required(messages.required).oneOf(["w", "l", "n/a"]),
+        final: Yup.mixed().required(messages.required).oneOf(["st", "ot", "so", "np"]),
+      });
+      return futureDate ? inFuture : inThePast;
+    },
     onSubmit: submitForm,
   });
 
@@ -123,12 +135,14 @@ const AddEditMatch = () => {
     ));
 
   const onDateChanged = (date) => {
-    if (date.getTime() > Date.now()) {
+    if (isToday(date) || isFuture(date)) {
+      setFutureDate(true);
       formik.setFieldValue("result", "n/a");
       formik.setFieldValue("final", "np");
       formik.setFieldValue("resultLocal", 0);
       formik.setFieldValue("resultAway", 0);
     } else {
+      setFutureDate(false);
       if (formik.values.result === "n/a") formik.setFieldValue("result", "");
       if (formik.values.final === "np") formik.setFieldValue("final", "");
     }
@@ -155,7 +169,7 @@ const AddEditMatch = () => {
     const result = Math.sign(formik.values.resultLocal - formik.values.resultAway);
     if (result === 0 || side === 0) return;
 
-    console.log(`Effect: ${side} ${result}`);
+    // console.log(`Effect: ${side} ${result}`);
 
     if (side === result) formik.setFieldValue("result", "w");
     else formik.setFieldValue("result", "l");
@@ -197,7 +211,7 @@ const AddEditMatch = () => {
         .catch((err) => showToastError(err))
         .finally(() => setLoading(false));
     }
-  }, [matchid]);
+  }, [matchid, navigate]);
 
   return (
     <AdminLayout title={matchid ? "Edit match" : "Add match"}>
@@ -206,23 +220,16 @@ const AddEditMatch = () => {
           <div>
             <h4>Select date</h4>
             <FormControl className="mb-5">
-              {/* <TextField
-                id="date"
-                name="date"
-                type="date"
-                variant="outlined"
-                
-                {...formik.getFieldProps("date")}
-                {...formikTextErrorHelper(formik, "date")}
-              /> */}
               <DatePicker
+                required
                 label="Match date"
                 id="date"
                 name="date"
                 type="date"
+                mask="__.__.____"
                 value={formik.values.date}
                 onChange={(value) => {
-                  // console.log(value);
+                  if (typeof value === "undefined" || value === null) return;
                   if (isNaN(value.getTime())) return;
                   formik.setFieldValue("date", formatISO(value, { representation: "date" }));
                   onDateChanged(value);
@@ -239,6 +246,7 @@ const AddEditMatch = () => {
             <h4>Result local</h4>
             <FormControl error={formik.errors.local && formik.touched.local}>
               <Select
+                required
                 id="local"
                 name="local"
                 variant="outlined"
@@ -253,12 +261,17 @@ const AddEditMatch = () => {
               {formikSelectErrorHelper(formik, "local")}
             </FormControl>
             <FormControl style={{ marginLeft: "10px" }}>
-              <TextField
+              <TextFieldDebounced
+                required
+                disabled={loading || futureDate}
+                key={loading ? "not-loaded" : formik.initialValues.resultLocal}
                 id="resultLocal"
                 name="resultLocal"
                 type="number"
                 variant="outlined"
-                {...formik.getFieldProps("resultLocal")}
+                onChange={formik.handleChange}
+                children={10}
+                defaultValue={formik.values.resultLocal}
                 {...formikTextErrorHelper(formik, "resultLocal")}
               />
             </FormControl>
@@ -268,6 +281,7 @@ const AddEditMatch = () => {
             <h4>Result away</h4>
             <FormControl error={formik.errors.away && formik.touched.away}>
               <Select
+                required
                 id="away"
                 name="away"
                 variant="outlined"
@@ -282,12 +296,16 @@ const AddEditMatch = () => {
               {formikSelectErrorHelper(formik, "away")}
             </FormControl>
             <FormControl style={{ marginLeft: "10px" }}>
-              <TextField
+              <TextFieldDebounced
+                required
+                disabled={loading || futureDate}
+                key={loading ? "not-loaded" : formik.initialValues.resultAway}
                 id="resultAway"
                 name="resultAway"
                 type="number"
                 variant="outlined"
-                {...formik.getFieldProps("resultAway")}
+                onChange={formik.handleChange}
+                defaultValue={formik.values.resultAway}
                 {...formikTextErrorHelper(formik, "resultAway")}
               />
             </FormControl>
@@ -300,12 +318,16 @@ const AddEditMatch = () => {
 
             <div className="mb-5">
               <FormControl>
-                <TextField
+                <TextFieldDebounced
+                  required
+                  disabled={loading}
+                  key={loading ? "not-loaded" : formik.initialValues.stadium}
                   id="stadium"
                   name="stadium"
                   variant="outlined"
                   placeholder="Enter stadium name"
-                  {...formik.getFieldProps("stadium")}
+                  onChange={formik.handleChange}
+                  defaultValue={formik.values.stadium}
                   {...formikTextErrorHelper(formik, "stadium")}
                 />
               </FormControl>
@@ -313,12 +335,16 @@ const AddEditMatch = () => {
 
             <div className="mb-5">
               <FormControl>
-                <TextField
+                <TextFieldDebounced
+                  required
+                  disabled={loading || futureDate}
+                  key={loading ? "not-loaded" : formik.initialValues.bestWinning}
                   id="bestWinning"
                   name="bestWinning"
                   variant="outlined"
                   placeholder="Best of winning team"
-                  {...formik.getFieldProps("bestWinning")}
+                  onChange={formik.handleChange}
+                  defaultValue={formik.values.bestWinning}
                   {...formikTextErrorHelper(formik, "bestWinning")}
                 />
               </FormControl>
@@ -326,12 +352,16 @@ const AddEditMatch = () => {
 
             <div className="mb-5">
               <FormControl>
-                <TextField
+                <TextFieldDebounced
+                  required
+                  disabled={loading || futureDate}
+                  key={loading ? "not-loaded" : formik.initialValues.bestLosing}
                   id="bestLosing"
                   name="bestLosing"
                   variant="outlined"
                   placeholder="Best of losing team"
-                  {...formik.getFieldProps("bestLosing")}
+                  onChange={formik.handleChange}
+                  defaultValue={formik.values.bestLosing}
                   {...formikTextErrorHelper(formik, "bestLosing")}
                 />
               </FormControl>
@@ -343,6 +373,7 @@ const AddEditMatch = () => {
                   id="result"
                   name="result"
                   variant="outlined"
+                  required
                   displayEmpty
                   {...formik.getFieldProps("result")}
                 >
@@ -363,6 +394,7 @@ const AddEditMatch = () => {
                   id="final"
                   name="final"
                   variant="outlined"
+                  required
                   displayEmpty
                   {...formik.getFieldProps("final")}
                 >

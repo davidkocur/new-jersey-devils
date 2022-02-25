@@ -1,13 +1,15 @@
-.header_logo {
+.header-logo {
   display: inline-block;
   padding: 10px 20px 0 20px;
 }
 
-.header_logo a {
+.header-logo a {
   display: inline-block;
+  width: 58px;
+  height: 58px;
 }
 
-.header_logo h1 {
+.header-logo h1 {
   display: inline-block;
   margin: 0;
   padding: 6px 16px;
@@ -23,7 +25,7 @@
 }
 
 .MuiToolbar-root .MuiButton-root:hover {
-  background: #c00;
+  background-color: #c00 !important;
 }
 
 footer {
@@ -40,4 +42,22 @@ footer .footer_logo {
 
 footer .footer_copyright {
   margin: 10px 0px;
+}
+
+@media screen and (max-width: 450px) {
+  .header-logo {
+    padding: 10px 16px 0 16px;
+  }
+  .header-logo a {
+    width: 46px;
+    height: 46px;
+  }
+  .header-logo h1 {
+    font-size: 28px;
+    padding: 6px 0 6px 12px;
+  }
+  .MuiToolbar-root .MuiButton-root {
+    padding: 10px 16px 10px 0;
+    font-size: 14px;
+  }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import { signOut, getAuth } from "@firebase/auth";
 import { toast } from "react-toastify";
@@ -7,6 +7,9 @@ import logoImage from "../../resources/images/logos/team-logo.svg";
 import "./Common.css";
 import FormHelperText from "@mui/material/FormHelperText";
 import { useState } from "react";
+import { TextField } from "@mui/material";
+import { useEffect } from "react";
+import { differenceInCalendarDays, format, isPast } from "date-fns";
 
 /*=============================
          COMPONENTS
@@ -31,7 +34,7 @@ export const showToastSuccess = (message) => {
   toast.success(message, { position: toast.POSITION.TOP_LEFT });
 };
 
-export const Tag = ({ children, linkTo, style }) => {
+export const Tag = ({ children, linkTo, style, className }) => {
   const template = (
     <div
       style={{
@@ -44,6 +47,7 @@ export const Tag = ({ children, linkTo, style }) => {
         fontWeight: "900",
         ...style,
       }}
+      className={className || ""}
     >
       {children}
     </div>
@@ -56,7 +60,7 @@ export const MatchBlock = ({ match }) => {
   return (
     <div className="match_block">
       <div className="match_date">
-        {match.date}
+        {formatMatchDate(match.date)}
         <span className="thin-line" />
         <span className="thin-line" />
       </div>
@@ -84,6 +88,44 @@ export const MatchBlock = ({ match }) => {
       </div>
     </div>
   );
+};
+
+export const TextFieldDebounced = ({ onChange, ...rest }) => {
+  const inputRef = useRef(null);
+  const debounceOnChange = useCallback(debounceV2(onChange, 700), [debounceV2]);
+
+  useEffect(() => {
+    const currentRef = inputRef.current;
+    currentRef.addEventListener("input", debounceOnChange);
+    return () => {
+      if (currentRef) currentRef.removeEventListener("input", debounceOnChange);
+    };
+  }, [inputRef, debounceOnChange]);
+
+  return <TextField ref={inputRef} {...rest} />;
+};
+
+export const TextFieldDebounced2 = ({ onChange, error, ...rest }) => {
+  const [touched, setTouched] = useState(false);
+  const inputRef = useRef(null);
+
+  const debounceOnChange = useCallback(debounceV2(onChange, 700), [debounceV2]);
+  const blurInput = useCallback(() => setTouched(true), [setTouched]);
+
+  useEffect(() => {
+    const currentRef = inputRef.current;
+
+    currentRef.addEventListener("input", debounceOnChange);
+    currentRef.addEventListener("blur", blurInput);
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener("input", debounceOnChange);
+        currentRef.removeEventListener("blur", blurInput);
+      }
+    };
+  }, [inputRef, debounceOnChange, blurInput]);
+
+  return <TextField ref={inputRef} error={touched && error} helperText={error} {...rest} />;
 };
 
 /*=============================
@@ -123,14 +165,43 @@ export function debounce(func, timeout = 300) {
   };
 }
 
-export const useDebouncedInput = ({ defaultText = "", debounceTime = 1000 }) => {
-  const [text, setText] = useState(defaultText);
-  const [t, setT] = useState(null);
+export function debounceV2(callback, wait = 500, immediate) {
+  let timeout;
 
-  const onChange = (text) => {
-    if (t) clearTimeout(t);
-    setT(setTimeout(() => setText(text), debounceTime));
+  return (...args) => {
+    const context = this;
+
+    const later = () => {
+      timeout = null;
+      if (!immediate) callback.apply(context, args);
+    };
+
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+
+    if (callNow) {
+      callback.apply(context, args);
+    }
   };
+}
 
-  return [text, onChange];
-};
+export function sortMatchesByDate(matchA, matchB) {
+  return Math.sign(matchB.date.getTime() - matchA.date.getTime());
+}
+
+export function sortMatchesByDateDesc(matchA, matchB) {
+  return Math.sign(matchA.date.getTime() - matchB.date.getTime());
+}
+
+export function formatMatchDate(date) {
+  const isPastDate = isPast(date);
+  const difference = isPastDate
+    ? differenceInCalendarDays(new Date(), date)
+    : differenceInCalendarDays(date, new Date());
+
+  if (difference < 1) return "Today at 20:00";
+  else if (difference < 2) return isPastDate ? "Yesterday" : "Tomorrow at 19:00";
+  else if (difference < 7 && !isPastDate) return format(date, "d MMM yy (eeee)");
+  else return format(date, "d MMM yyyy");
+}

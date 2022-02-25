@@ -1,6 +1,6 @@
-import { format } from "date-fns";
 import { motion, AnimatePresence } from "framer-motion";
 import React from "react";
+import { formatMatchDate } from "../Utils/Common";
 
 const itemVariants = {
   hidden: {
@@ -23,23 +23,6 @@ const itemVariants = {
 };
 
 const MatchesList = ({ matches }) => {
-  const getDateFormat = (date) => {
-    const matchDate = new Date(date);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const deltaMillis = matchDate - today;
-    const dayInMillis = 86400000 - 1;
-
-    if (Math.abs(deltaMillis) < dayInMillis) return "Today at 20:00";
-    else if (Math.abs(deltaMillis) < dayInMillis * 2)
-      return deltaMillis < 0 ? "Yesterday" : "Tomorrow at 19:00";
-    else if (Math.abs(deltaMillis) < dayInMillis * 6)
-      return deltaMillis < 0
-        ? format(matchDate, "d MMM yyyy")
-        : format(matchDate, "d MMM yy (eeee)");
-    else return format(matchDate, "d MMM yyyy");
-  };
-
   const renderFinalText = (finalCode) => {
     switch (finalCode) {
       case "st":
@@ -100,7 +83,7 @@ const MatchesList = ({ matches }) => {
             <div className="details">
               <div>
                 Date:&nbsp;
-                <strong>{getDateFormat(match.date)}</strong>
+                <strong>{formatMatchDate(match.date)}</strong>
               </div>
               <div>
                 Stadium:&nbsp;

@@ -20,3 +20,10 @@
 .home_matches_wrapper .home_matches .item .wrapper {
   padding-right: 30px;
 }
+
+@media screen and (max-width: 1024px) {
+  .home_matches_wrapper .home_matches .item {
+    width: 100%;
+    padding: 0 2rem;
+  }
+}

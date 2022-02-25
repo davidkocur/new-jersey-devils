@@ -35,7 +35,7 @@ const featuredPlayers = [
 
 const Leaderboard = ({}) => {
   return (
-    <ul className="home_leaderboard_wrapper">
+    <ul className="home-leaderboard-wrapper">
       {featuredPlayers.map((player, index) => (
         <li key={"plr" + index}>
           <PlayerCard

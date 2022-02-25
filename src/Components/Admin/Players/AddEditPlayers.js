@@ -17,6 +17,7 @@ import {
 import {
   formikSelectErrorHelper,
   formikTextErrorHelper,
+  TextFieldDebounced,
   showToastError,
   showToastSuccess,
 } from "../../Utils/Common";
@@ -104,7 +105,7 @@ const AddEditPlayers = () => {
     onSubmit: (values) => submitForm(values),
   });
 
-  console.log(formik.values.image);
+  console.log("AddEditPlayers-RENDER");
 
   const submitForm = (values) => {
     setLoading(true);
@@ -182,12 +183,16 @@ const AddEditPlayers = () => {
 
           <div className="mb-5">
             <FormControl>
-              <TextField
+              <TextFieldDebounced
+                required
+                disabled={loading}
+                key={loading ? "not-loaded" : formik.initialValues.name}
                 id="name"
                 name="name"
                 variant="outlined"
                 placeholder="Player first name"
-                {...formik.getFieldProps("name")}
+                onChange={formik.handleChange}
+                defaultValue={formik.values.name}
                 {...formikTextErrorHelper(formik, "name")}
               />
             </FormControl>
@@ -195,12 +200,16 @@ const AddEditPlayers = () => {
 
           <div className="mb-5">
             <FormControl>
-              <TextField
+              <TextFieldDebounced
+                required
+                disabled={loading}
+                key={loading ? "not-loaded" : formik.initialValues.lastname}
                 id="lastname"
                 name="lastname"
                 variant="outlined"
                 placeholder="Player last name"
-                {...formik.getFieldProps("lastname")}
+                onChange={formik.handleChange}
+                defaultValue={formik.values.lastname}
                 {...formikTextErrorHelper(formik, "lastname")}
               />
             </FormControl>
@@ -208,13 +217,17 @@ const AddEditPlayers = () => {
 
           <div className="mb-5">
             <FormControl>
-              <TextField
-                type={"number"}
+              <TextFieldDebounced
+                required
+                disabled={loading}
+                key={loading ? "not-loaded" : formik.initialValues.number}
                 id="number"
                 name="number"
+                type="number"
                 variant="outlined"
                 placeholder="Player number"
-                {...formik.getFieldProps("number")}
+                onChange={formik.handleChange}
+                defaultValue={formik.values.number}
                 {...formikTextErrorHelper(formik, "number")}
               />
             </FormControl>
