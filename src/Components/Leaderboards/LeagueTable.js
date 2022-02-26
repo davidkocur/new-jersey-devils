@@ -1,12 +1,46 @@
-import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Table, TableBody, TableCell, TableHead, TableRow, useMediaQuery } from "@mui/material";
+
 import { getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { positionsCollection } from "../../firebase";
 import { showToastError } from "../Utils/Common";
+import { motion } from "framer-motion";
 
-const LeagueTable = () => {
+const tableVariants = {
+  hidden: {
+    opacity: 0,
+    x: 50,
+    transition: {
+      opacity: { ease: "easeOut", duration: 0.3 },
+      x: { ease: "easeOut", duration: 0.3 },
+    },
+    transitionEnd: {
+      visibility: "hidden",
+    },
+  },
+  visible: {
+    visibility: "visible",
+    opacity: 1,
+    x: 0,
+    transition: {
+      opacity: { ease: "easeOut", duration: 0.3 },
+      x: { ease: "easeOut", duration: 0.3 },
+    },
+  },
+  static: {
+    visibility: "visible",
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
+const LeagueTable = ({ isOpen }) => {
   const [loading, setLoading] = useState(false);
   const [positions, setPositions] = useState([]);
+  const isTablet = useMediaQuery("(max-width:1024px)");
 
   useEffect(() => {
     if (positions.length < 1) {
@@ -34,8 +68,13 @@ const LeagueTable = () => {
     ));
 
   return (
-    <div className="league_table_wrapper">
-      <div className="title">League Table</div>
+    <motion.div
+      className="league_table_wrapper"
+      variants={tableVariants}
+      initial={false}
+      animate={!isTablet ? "static" : isOpen ? "visible" : "hidden"}
+    >
+      <h3 className="title">League Table</h3>
       <div>
         <Table>
           <TableHead>
@@ -51,7 +90,7 @@ const LeagueTable = () => {
           <TableBody>{renderPositions()}</TableBody>
         </Table>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

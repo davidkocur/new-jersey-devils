@@ -1,4 +1,5 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, IconButton } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { getDocs } from "firebase/firestore";
 import React, { useEffect, useState, useReducer } from "react";
 import { matchesCollection } from "../../firebase";
@@ -23,6 +24,7 @@ const resultFilters = [
 const Leaderboards = () => {
   const [loading, setLoading] = useState(false);
   const [matches, setMatches] = useState([]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [state, dispatch] = useReducer((prevState, nextState) => ({ ...prevState, ...nextState }), {
     filteredMatches: matches,
     playedFilter: "all",
@@ -49,6 +51,11 @@ const Leaderboards = () => {
         .finally(() => setLoading(false));
     }
   }, [matches, state]);
+
+  const handleDrawerClose = () => {
+    console.log(`Table open ? ${drawerOpen}`);
+    setDrawerOpen(!drawerOpen);
+  };
 
   const setPlayedFilter = (playedFilter) => {
     const cond = playedFilter === "yes";
@@ -115,8 +122,11 @@ const Leaderboards = () => {
               </div>
               {matches.length > 0 && <MatchesList matches={state.filteredMatches} />}
             </div>
-            <div className="right">
-              <LeagueTable />
+            <div className="right" style={{ pointerEvents: drawerOpen ? "auto" : "none" }}>
+              <IconButton aria-label="open table" onClick={handleDrawerClose}>
+                <MenuIcon fontSize="medium" />
+              </IconButton>
+              <LeagueTable isOpen={drawerOpen} onClose={handleDrawerClose} />
             </div>
           </div>
         </div>

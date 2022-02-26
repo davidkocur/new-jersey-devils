@@ -4,6 +4,7 @@
 }
 
 .the_matches_wrapper {
+  position: relative;
   display: flex;
 }
 
@@ -13,11 +14,12 @@
 
 .the_matches_wrapper .right {
   width: 400px;
+  overflow: hidden;
 }
 
 .progress_full {
-  height: 100vh;
   display: flex;
+  height: 100%;
   justify-content: center;
   align-items: center;
 }
@@ -28,6 +30,7 @@
 
 .match_box_big {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: 143px;
   padding: 20px;
@@ -37,7 +40,7 @@
 }
 
 .match_box_big .results_wrapper {
-  margin-right: 4rem;
+  flex: 2 1 auto;
 }
 
 .match_box_big .block div {
@@ -76,7 +79,8 @@
 }
 
 .match_box_big .final-wrapper {
-  min-width: 9ch;
+  flex: 1 1 auto;
+  /* min-width: 9ch; */
   margin-right: 1.2rem;
   font-size: 1.45rem;
   text-align: right;
@@ -97,6 +101,9 @@
 }
 
 .match_box_big .details {
+  flex: 2 1 auto;
+  max-width: 30%;
+  overflow: hidden;
   border-left: 1px solid #d1545a;
   height: 102px;
   padding-left: 16px;
@@ -159,9 +166,23 @@
   /* border-left: 1px solid #98c6e9; */
   background: #b4a2a4;
 }
+
+.the_matches_wrapper .right button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  color: #fff;
+  margin: 1rem;
+  padding: 0.7rem;
+  z-index: 30;
+  pointer-events: auto;
+}
+
 .league_table_wrapper .title {
   padding: 1.8rem 1.5rem;
   font-size: 22px;
+  font-weight: 700 !important;
   color: #efefef;
   background: #232323;
   /* border-bottom: 1px solid #01285e; */
@@ -177,4 +198,22 @@
   border-bottom: 1px solid #ffffff;
   color: #ffffff;
   text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .the_matches_wrapper .right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* visibility: hidden; */
+  }
+  .the_matches_wrapper .right button {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .match_box_big .details {
+    display: none;
+  }
 }
