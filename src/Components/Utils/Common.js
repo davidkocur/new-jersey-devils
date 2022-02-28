@@ -58,32 +58,35 @@ export const Tag = ({ children, linkTo, style, className }) => {
 
 export const MatchBlock = ({ match }) => {
   return (
-    <div className="match_block">
-      <div className="match_date">
-        {formatMatchDate(match.date)}
-        <span className="thin-line" />
-        <span className="thin-line" />
+    <div className="match-block">
+      <div className="match-head">
+        <div className="match-date">
+          {formatMatchDate(match.date)}
+          <span className="thin-line" />
+          <span className="thin-line" />
+        </div>
+        {!match.played && <div className="upcomming">upcomming</div>}
       </div>
-      <div className="match_wrapper">
-        <div className="match_top">
+      <div className="match-wrapper">
+        <div className="match-top">
           <div className="left">
             <div
               className="icon"
               style={{ background: `url(/images/team-icons/${match.localThmb}.svg)` }}
             />
-            <div className="team_name">{match.local}</div>
+            <div className="team-name">{match.local}</div>
           </div>
-          <div className="right">{match.final ? match.resultLocal : "-"}</div>
+          <div className="right">{match.played ? match.resultLocal : "-"}</div>
         </div>
-        <div className="match_bottom">
+        <div className="match-bottom">
           <div className="left">
             <div
               className="icon"
               style={{ background: `url(/images/team-icons/${match.awayThmb}.svg)` }}
             />
-            <div className="team_name">{match.away}</div>
+            <div className="team-name">{match.away}</div>
           </div>
-          <div className="right">{match.final ? match.resultAway : "-"}</div>
+          <div className="right">{match.played ? match.resultAway : "-"}</div>
         </div>
       </div>
     </div>

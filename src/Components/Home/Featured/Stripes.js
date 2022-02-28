@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
 import { enterTransition } from "../../Utils/transitions";
 
 import playerPNG from "../../../resources/images/featured-player.png";
+import { debounce } from "../../Utils/Common";
+import { useMediaQuery } from "@mui/material";
 
 const degToRad = (deg) => deg * (Math.PI / 180);
 const degreesToVector = (degs) => {
@@ -13,18 +15,76 @@ const degreesToVector = (degs) => {
 const stripeAngle = 20;
 const directionVector = degreesToVector(90 + stripeAngle);
 
+const sizeConfig = (device) => {
+  switch (device) {
+    case "mobile":
+      return {
+        width: 160,
+        xMargin: 50,
+        growWidth: 280,
+        xAnimOffset: 50,
+        height: 480,
+        marginTop: 220,
+      };
+    case "tablet":
+      return {
+        width: 180,
+        xMargin: 40,
+        growWidth: 320,
+        xAnimOffset: 70,
+        height: 580,
+        marginTop: 250,
+      };
+    // case "desktop":
+    //   return {
+    //     width: 230,
+    //     growWidth: 400,
+    //     height: 700,
+    //     xOffset: 85,
+    //   };
+    default:
+      return {
+        width: 230,
+        xMargin: 50,
+        growWidth: 400,
+        xAnimOffset: 85,
+        height: 700,
+        marginTop: 270,
+      };
+  }
+  // return {
+  //   width: 230,
+  //   growWidth: 400,
+  //   height: 480,
+  //   xOffset: 85,
+  // };
+};
+
 const Stripes = () => {
+  const isMobile = useMediaQuery("(max-width:600px)");
+  const config = sizeConfig(isMobile ? "mobile" : "tablet");
+
   return (
     <div className="featured_stripes">
       <Stripe
-        style={{ top: "-120px", left: "calc(50% - 395px)", backgroundColor: "#ffffff" }}
+        style={{
+          top: "-120px",
+          left: `calc(50% - ${config.width * 1.5 + config.xMargin}px)`,
+          backgroundColor: "#ffffff",
+        }}
+        config={config}
         startDistance={1200}
         delay={0.5}
         delayChildren={0.4}
         animate="left"
       />
       <Stripe
-        style={{ top: "-120px", left: "calc(50% - 115px)", backgroundColor: "#c00" }}
+        style={{
+          top: "-120px",
+          left: `calc(50% - ${config.width * 0.5}px)`,
+          backgroundColor: "#c00",
+        }}
+        config={config}
         startDistance={-1200}
         delay={0.7}
         delayChildren={0.2}
@@ -32,15 +92,20 @@ const Stripes = () => {
       >
         <ImageSlide
           imgSrc={playerPNG}
-          height="700px"
-          style={{ marginTop: "270px" }}
+          height={`${config.height}px`}
+          style={{ marginTop: `${config.marginTop}px` }}
           xStart={300}
           xEnd={150}
           animDelay={2}
         />
       </Stripe>
       <Stripe
-        style={{ top: "-120px", left: "calc(50% + 165px)", backgroundColor: "#ffffff" }}
+        style={{
+          top: "-120px",
+          left: `calc(50% + ${config.width * 0.5 + config.xMargin}px)`,
+          backgroundColor: "#ffffff",
+        }}
+        config={config}
         startDistance={1200}
         delay={0.9}
         delayChildren={0}
@@ -56,16 +121,16 @@ const animStripeWrapper = {
   right: { y: 0, x: 0 },
 };
 
-const animStripe = {
-  center: {
-    width: "400px",
-    x: -85,
-  },
-  left: { x: -85 },
-  right: { x: 85 },
-};
+const Stripe = ({ children, style, config, startDistance, delay, delayChildren, animate }) => {
+  const animStripe = {
+    center: {
+      width: config.growWidth + "px",
+      x: -config.xAnimOffset,
+    },
+    left: { x: -config.xAnimOffset },
+    right: { x: config.xAnimOffset },
+  };
 
-const Stripe = ({ children, style, startDistance, delay, delayChildren, animate }) => {
   return (
     <motion.div
       style={{
@@ -93,7 +158,7 @@ const Stripe = ({ children, style, startDistance, delay, delayChildren, animate 
           ...style,
         }}
         variants={animStripe}
-        initial={{ width: "230px", rotate: stripeAngle }}
+        initial={{ width: config.width, rotate: stripeAngle }}
         transition={enterTransition}
       >
         {children}

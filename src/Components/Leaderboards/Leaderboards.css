@@ -164,7 +164,8 @@
 
 .league_table_wrapper {
   /* border-left: 1px solid #98c6e9; */
-  background: #b4a2a4;
+  padding: 0 0 1rem 0;
+  background: #232323;
 }
 
 .the_matches_wrapper .right button {
@@ -186,6 +187,10 @@
   color: #efefef;
   background: #232323;
   /* border-bottom: 1px solid #01285e; */
+}
+
+.league_table_wrapper .table-body {
+  background: #b4a2a4;
 }
 
 .the_matches_wrapper .progress {

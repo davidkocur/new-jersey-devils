@@ -48,7 +48,9 @@ const LeagueTable = ({ isOpen }) => {
 
       getDocs(positionsCollection)
         .then((snapshot) => {
-          setPositions(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+          const tempPositions = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+          tempPositions.sort((teamA, teamB) => teamA.p - teamB.p);
+          setPositions(tempPositions);
         })
         .catch((err) => showToastError(err))
         .finally(() => setLoading(false));
@@ -62,7 +64,7 @@ const LeagueTable = ({ isOpen }) => {
         <TableCell>{pos.team}</TableCell>
         <TableCell>{pos.w}</TableCell>
         <TableCell>{pos.l}</TableCell>
-        <TableCell>{pos.d}</TableCell>
+        <TableCell>{pos.ot}</TableCell>
         <TableCell>{pos.pts}</TableCell>
       </TableRow>
     ));
@@ -75,7 +77,7 @@ const LeagueTable = ({ isOpen }) => {
       animate={!isTablet ? "static" : isOpen ? "visible" : "hidden"}
     >
       <h3 className="title">League Table</h3>
-      <div>
+      <div className="table-body">
         <Table>
           <TableHead>
             <TableRow>
@@ -83,7 +85,7 @@ const LeagueTable = ({ isOpen }) => {
               <TableCell>Team</TableCell>
               <TableCell>W</TableCell>
               <TableCell>L</TableCell>
-              <TableCell>D</TableCell>
+              <TableCell>OT</TableCell>
               <TableCell>Pts</TableCell>
             </TableRow>
           </TableHead>

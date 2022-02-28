@@ -4,10 +4,28 @@ import Stripes from "./Stripes";
 import { enterTransition } from "../../Utils/transitions";
 
 import "./Featured.css";
+import { useMediaQuery } from "@mui/material";
+
+const config = (device) => {
+  switch (device) {
+    case "mobile":
+      return { height: "580px", marginTop: "60px" };
+    case "tablet":
+      return { height: "680px", marginTop: "80px" };
+    default:
+      return { height: "800px", marginTop: "120px" };
+  }
+};
 
 const Featured = () => {
+  const isMobile = useMediaQuery("(max-width:600px)");
+  const isTablet = useMediaQuery("(max-width:1024px)");
+
   return (
-    <div className="featured_wrapper">
+    <div
+      className="featured_wrapper"
+      style={config(isMobile ? "mobile" : isTablet ? "tablet" : "desktop")}
+    >
       <Stripes />
       <FeaturedButton />
     </div>

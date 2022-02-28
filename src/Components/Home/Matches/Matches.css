@@ -27,3 +27,9 @@
     padding: 0 2rem;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .home_matches_wrapper .home_matches .item {
+    padding: 0;
+  }
+}

@@ -1,7 +1,6 @@
 .featured_wrapper {
   position: relative;
   margin-top: 120px;
-  height: 800px;
   overflow: hidden;
 }
 
@@ -83,4 +82,39 @@
   font-size: 92px;
   text-transform: uppercase;
   padding: 0px 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .featured-button-wrapper {
+    bottom: 20px;
+    left: 0;
+    height: 96px;
+  }
+  .featured-btn {
+    top: -100%;
+    left: 50%;
+    height: 300%;
+  }
+  .featured-btn-text {
+    top: 33%;
+    padding: 0 10px;
+    font-size: 64px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .featured-button-wrapper {
+    bottom: 20px;
+    left: 0;
+    height: 64px;
+  }
+  .featured-btn {
+    top: -100%;
+    left: 15%;
+    height: 300%;
+  }
+  .featured-btn-text {
+    top: 33%;
+    padding: 0 10px;
+    font-size: 48px;
+  }
 }

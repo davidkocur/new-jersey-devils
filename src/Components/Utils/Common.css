@@ -1,38 +1,52 @@
-.match_block .match_date {
+.match-block .match-head {
+  display: inline-flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  padding-right: 80px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.match-block .match-date {
   position: relative;
-  display: inline-block;
   margin-bottom: 10px;
   padding-left: 15px;
-  color: #ffffff;
   font-size: 18px;
   font-weight: 500;
 }
 
-.match_block .match_date .thin-line {
+.match-block .match-date .thin-line {
   position: absolute;
   bottom: 0px;
   height: 45%;
   border-top: 2px solid #ffffff;
 }
-.match_block .match_date .thin-line:nth-child(1) {
+.match-block .match-date .thin-line:nth-child(1) {
   left: 0px;
   width: 8px;
 }
-.match_block .match_date .thin-line:nth-child(2) {
+.match-block .match-date .thin-line:nth-child(2) {
   right: -47px;
   width: 40px;
 }
 
-.match_block .match_wrapper .match_top,
-.match_block .match_wrapper .match_bottom {
+.match-block .upcomming {
+  font-size: 18px;
+  font-weight: 300;
+  text-align: right;
+}
+
+.match-block .match-wrapper .match-top,
+.match-block .match-wrapper .match-bottom {
   display: flex;
 }
-.match_block .match_wrapper .match_bottom {
+.match-block .match-wrapper .match-bottom {
   margin-top: 5px;
 }
 
-.match_block .match_wrapper .match_top .left,
-.match_block .match_wrapper .match_bottom .left {
+.match-block .match-wrapper .match-top .left,
+.match-block .match-wrapper .match-bottom .left {
   background: #ffffff;
   font-family: "Exo", sans-serif;
   flex-grow: 1;
@@ -40,26 +54,26 @@
   padding: 10px;
 }
 
-.match_block .match_wrapper .match_top .left div,
-.match_block .match_wrapper .match_bottom .left div {
+.match-block .match-wrapper .match-top .left div,
+.match-block .match-wrapper .match-bottom .left div {
   float: left;
 }
 
-.match_block .match_wrapper .match_top .left .icon,
-.match_block .match_wrapper .match_bottom .left .icon {
+.match-block .match-wrapper .match-top .left .icon,
+.match-block .match-wrapper .match-bottom .left .icon {
   width: 68px;
   height: 44px;
   margin: 3px 0;
   background-size: cover !important;
 }
-.match_block .match_wrapper .match_top .left .team_name,
-.match_block .match_wrapper .match_bottom .left .team_name {
+.match-block .match-wrapper .match-top .left .team-name,
+.match-block .match-wrapper .match-bottom .left .team-name {
   font-size: 30px;
   padding: 6px 10px;
 }
 
-.match_block .match_wrapper .match_top .right,
-.match_block .match_wrapper .match_bottom .right {
+.match-block .match-wrapper .match-top .right,
+.match-block .match-wrapper .match-bottom .right {
   background: #310e1b;
   width: 70px;
   color: #ffffff;
@@ -80,7 +94,4 @@
   padding: 2px;
   color: #c00;
   cursor: pointer;
-}
-
-@media screen and (max-width: 450px) {
 }
