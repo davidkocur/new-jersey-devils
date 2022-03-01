@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Container } from "@mui/material";
 import { signInWithEmailAndPassword, getAuth } from "@firebase/auth";
-import { useNavigate, Navigate } from "react-router";
+import { useNavigate, Navigate, useLocation } from "react-router";
 import { useStore } from "../../Helpers/Store";
 import { showToastError, showToastSuccess } from "../Utils/Common";
 
@@ -14,6 +14,8 @@ const SignIn = () => {
   const [state] = useStore();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/dashboard";
 
   const formik = useFormik({
     initialValues: {
@@ -38,7 +40,7 @@ const SignIn = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         showToastSuccess("Welcome back!");
-        navigate("/dashboard", { replace: true });
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         setLoading(false);
@@ -47,7 +49,7 @@ const SignIn = () => {
   };
 
   return !state.user ? (
-    <div className="container full_height_wrapper">
+    <Container maxWidth="lg" className="full_height_wrapper">
       <div className="signin_container">
         <form onSubmit={formik.handleSubmit}>
           <h2>Plaese login</h2>
@@ -80,7 +82,7 @@ const SignIn = () => {
           )}
         </form>
       </div>
-    </div>
+    </Container>
   ) : (
     <Navigate to="/dashboard" replace />
   );

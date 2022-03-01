@@ -33,7 +33,7 @@ export const TagAnim = ({ children, linkTo, className, style, animStyle, delay }
   const [isInViewport, setInViewport] = useState(false);
   useEffect(() => {
     const elementID = addObservedElement(containerRef.current, () => {
-      console.log(`ID ${containerRef.current.id} is in viewport!`);
+      // console.log(`ID ${containerRef.current.id} is in viewport!`);
       setInViewport(true);
       removeObservedElement(elementID);
     });

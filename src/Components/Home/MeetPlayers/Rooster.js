@@ -2,7 +2,7 @@ import React from "react";
 
 import TatarJPG from "../../../resources/images/players/tatar.jpg";
 import ZachaJPG from "../../../resources/images/players/zacha.jpg";
-import MercerJPG from "../../../resources/images/players/mercer.jpg";
+import StudenicJPG from "../../../resources/images/players/studenic.jpg";
 import JarosJPG from "../../../resources/images/players/jaros.jpg";
 import PlayerCard from "../../Utils/PlayerCard";
 
@@ -20,10 +20,10 @@ const featuredPlayers = [
     image: ZachaJPG,
   },
   {
-    name: "Dawson",
-    lastName: "Mercer",
+    name: "Marian",
+    lastName: "Studenic",
     number: "#18",
-    image: MercerJPG,
+    image: StudenicJPG,
   },
   {
     name: "Christian",

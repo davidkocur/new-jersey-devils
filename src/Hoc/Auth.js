@@ -7,7 +7,7 @@ export const AuthGuard = ({ children }) => {
   const location = useLocation();
 
   if (!state.user) {
-    return <Navigate to="/sign-in" state={{ from: location }} />;
+    return <Navigate to="/sign-in" state={{ from: location }} replace />;
   }
 
   return children;

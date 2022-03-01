@@ -60,7 +60,6 @@ const ImageUploader = ({ dir, defaultImg, defaultImgName, onUploadSuccess, onIma
         .then(() => {
           setImageData({});
           onImageReset();
-          console.log("motherfucker was deleted");
         })
         .catch((err) => console.error(err))
         .finally(() => setIsProcessing(false));

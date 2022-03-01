@@ -24,7 +24,7 @@ export const addObservedElement = (element, callback) => {
 };
 
 export const removeObservedElement = (id) => {
-  console.log(`ID ${id} is no longer observed!`);
+  // console.log(`ID ${id} is no longer observed!`);
   observer.unobserve(observedElements[id].element);
   observedElements[id] = undefined;
   safeIDs.push(id);
