@@ -35,34 +35,22 @@ const sizeConfig = (device) => {
         height: 580,
         marginTop: 250,
       };
-    // case "desktop":
-    //   return {
-    //     width: 230,
-    //     growWidth: 400,
-    //     height: 700,
-    //     xOffset: 85,
-    //   };
     default:
       return {
-        width: 230,
-        xMargin: 50,
-        growWidth: 400,
-        xAnimOffset: 85,
-        height: 700,
-        marginTop: 270,
+        width: 180,
+        xMargin: 40,
+        growWidth: 360,
+        xAnimOffset: 90,
+        height: 640,
+        marginTop: 260,
       };
   }
-  // return {
-  //   width: 230,
-  //   growWidth: 400,
-  //   height: 480,
-  //   xOffset: 85,
-  // };
 };
 
-const Stripes = () => {
-  const isMobile = useMediaQuery("(max-width:600px)");
-  const config = sizeConfig(isMobile ? "mobile" : "tablet");
+const Stripes = ({ device }) => {
+  const config = sizeConfig(device);
+
+  console.log(`New config: ${device}`, config);
 
   return (
     <div className="featured_stripes">
@@ -122,6 +110,11 @@ const animStripeWrapper = {
 };
 
 const Stripe = ({ children, style, config, startDistance, delay, delayChildren, animate }) => {
+  /*  TODO: New values in the config, don't change the animation.
+   *        - add a custom prop to motion.div with config inside.
+   *        - than turn the variants object into a function
+   */
+
   const animStripe = {
     center: {
       width: config.growWidth + "px",

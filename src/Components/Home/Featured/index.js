@@ -9,24 +9,24 @@ import { useMediaQuery } from "@mui/material";
 const config = (device) => {
   switch (device) {
     case "mobile":
-      return { height: "580px", marginTop: "60px" };
+      return { height: "580px", marginTop: "30px" };
     case "tablet":
-      return { height: "680px", marginTop: "80px" };
+      return { height: "680px", marginTop: "50px" };
     default:
-      return { height: "800px", marginTop: "120px" };
+      return { height: "740px", marginTop: "70px" };
   }
 };
 
 const Featured = () => {
   const isMobile = useMediaQuery("(max-width:600px)");
-  const isTablet = useMediaQuery("(max-width:1024px)");
+  const isXL = useMediaQuery("(min-width:1440px)");
+  // const isTablet = useMediaQuery("(max-width:1024px)");
+
+  const device = isMobile ? "mobile" : isXL ? "large" : "tablet";
 
   return (
-    <div
-      className="featured_wrapper"
-      style={config(isMobile ? "mobile" : isTablet ? "tablet" : "desktop")}
-    >
-      <Stripes />
+    <div className="featured_wrapper" style={config(device)}>
+      <Stripes device={device} />
       <FeaturedButton />
     </div>
   );
