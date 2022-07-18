@@ -4,29 +4,33 @@
 }
 
 .promotion_wrapper .promotion_animation {
+  position: relative;
   display: flex;
-  padding: 80px 0px 30px 0px;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 0px 80px 0px;
 }
 
 .promotion_wrapper .promotion_animation .left {
   text-transform: uppercase;
-  font-size: 150px;
+  font-size: 98px;
   font-family: "Exo", sans-serif;
   flex-grow: 1;
   color: #ffffff;
-  line-height: 135px;
+  line-height: 90px;
 }
 .promotion_wrapper .promotion_animation .left span {
   display: block;
 }
 
 .promotion_wrapper .promotion_animation .right {
-  line-height: 135px;
+  line-height: 90px;
+  margin-top: -32px;
 }
 
 .promotion_wrapper .promotion_animation .right div {
-  width: 280px;
-  height: 280px;
+  width: 212px;
+  height: 212px;
   background-size: contain !important;
 }
 
@@ -80,16 +84,38 @@
   background: url("../../../resources/images/jersey.png") no-repeat;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 600px) {
+  .promotion_wrapper .promotion_animation {
+    flex-direction: row;
+    padding-bottom: 30px;
+  }
+
   .promotion_wrapper .promotion_animation .left {
-    font-size: 116px;
-    line-height: 108px;
+    font-size: 112px;
+    line-height: 98px;
+  }
+
+  .promotion_wrapper .promotion_animation .right {
+    line-height: 98px;
+  }
+
+  .promotion_wrapper .promotion_animation .right {
+    position: absolute;
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .promotion_wrapper .promotion_animation .left {
+    font-size: 150px;
+    line-height: 135px;
   }
   .promotion_wrapper .promotion_animation .right {
-    line-height: 108px;
+    margin: 0;
+    line-height: 135px;
   }
   .promotion_wrapper .promotion_animation .right div {
-    width: 240px;
-    height: 240px;
+    width: 280px;
+    height: 280px;
   }
 }

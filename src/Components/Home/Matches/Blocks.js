@@ -9,7 +9,7 @@ import { useMediaQuery } from "@mui/material";
 const Blocks = () => {
   const [matches, setMatches] = useState([]);
   const [slice, setSlice] = useState([]);
-  const isTablet = useMediaQuery("(max-width:1024px)");
+  const isTablet = useMediaQuery("(min-width:960px)");
 
   useEffect(() => {
     if (matches.length <= 0) {
@@ -41,7 +41,7 @@ const Blocks = () => {
 
   return (
     <div className="home_matches">
-      {isTablet
+      {!isTablet
         ? slice.map((match) => (
             <Reveal
               key={match.id}

@@ -1,10 +1,8 @@
 import { motion } from "framer-motion";
-import React, { useEffect } from "react";
+import React from "react";
 import { enterTransition } from "../../Utils/transitions";
 
 import playerPNG from "../../../resources/images/featured-player.png";
-import { debounce } from "../../Utils/Common";
-import { useMediaQuery } from "@mui/material";
 
 const degToRad = (deg) => deg * (Math.PI / 180);
 const degreesToVector = (degs) => {
@@ -50,7 +48,7 @@ const sizeConfig = (device) => {
 const Stripes = ({ device }) => {
   const config = sizeConfig(device);
 
-  console.log(`New config: ${device}`, config);
+  // console.log(`New config: ${device}`, config);
 
   return (
     <div className="featured_stripes">
@@ -116,12 +114,12 @@ const Stripe = ({ children, style, config, startDistance, delay, delayChildren, 
    */
 
   const animStripe = {
-    center: {
-      width: config.growWidth + "px",
-      x: -config.xAnimOffset,
-    },
-    left: { x: -config.xAnimOffset },
-    right: { x: config.xAnimOffset },
+    center: (cfg) => ({
+      width: cfg.growWidth + "px",
+      x: -cfg.xAnimOffset,
+    }),
+    left: (cfg) => ({ x: -cfg.xAnimOffset }),
+    right: (cfg) => ({ x: cfg.xAnimOffset }),
   };
 
   return (
@@ -150,6 +148,7 @@ const Stripe = ({ children, style, config, startDistance, delay, delayChildren, 
           height: "1200px",
           ...style,
         }}
+        custom={config}
         variants={animStripe}
         initial={{ width: config.width, rotate: stripeAngle }}
         transition={enterTransition}

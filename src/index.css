@@ -133,8 +133,8 @@ li {
 }
 
 .full_height_wrapper {
-  margin-top: 120px;
-  min-height: calc(100vh - 293px);
+  margin-top: 104px;
+  min-height: calc(100vh - 277px);
 }
 
 .not_found_container {
@@ -164,4 +164,11 @@ li {
   padding-bottom: 28px;
   font-size: 148px;
   vertical-align: middle;
+}
+
+@media screen and (min-width: 600px) {
+  .full_height_wrapper {
+    margin-top: 120px;
+    min-height: calc(100vh - 293px);
+  }
 }

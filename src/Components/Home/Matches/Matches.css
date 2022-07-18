@@ -13,23 +13,18 @@
 }
 
 .home_matches_wrapper .home_matches .item {
-  width: 50%;
+  width: 100%;
   margin: 30px 0px;
 }
 
-.home_matches_wrapper .home_matches .item .wrapper {
-  padding-right: 30px;
-}
-
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 960px) {
   .home_matches_wrapper .home_matches .item {
-    width: 100%;
-    padding: 0 2rem;
+    width: 50%;
+  }
+  .home_matches_wrapper .home_matches .item .wrapper {
+    padding-right: 30px;
   }
 }
 
-@media screen and (max-width: 600px) {
-  .home_matches_wrapper .home_matches .item {
-    padding: 0;
-  }
+@media screen and (min-width: 1200px) {
 }

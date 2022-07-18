@@ -8,8 +8,6 @@ import "./MeetPlayers.css";
 import { Container } from "@mui/material";
 
 const MeetPlayers = () => {
-  // const [isVisible, setVisible] = useState(false);
-
   const renderTextTag = (text, delay) => (
     <TagAnim
       style={{
@@ -33,17 +31,6 @@ const MeetPlayers = () => {
     <div className="home-meetplayers">
       <Container maxWidth="lg">
         <div className="home-meetplayers-wrapper">
-          {/* <Fade
-            className="home_card-wrapper"
-            triggerOnce
-            fraction={0.3}
-            delay={500}
-            onVisibilityChange={(inView) => {
-              if (inView) setVisible(true);
-            }}
-          >
-            <Cards doAnimation={isVisible} />
-          </Fade> */}
           <Rooster />
           <div className="home-text-wrapper">
             <div className="title-tag">

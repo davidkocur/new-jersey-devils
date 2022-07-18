@@ -10,9 +10,6 @@ const Matches = () => {
   return (
     <div className="home_matches_wrapper">
       <Container maxWidth="lg">
-        {/* <Tag style={{ backgroundColor: "#720000", fontSize: "50px", color: "#ffffff" }}>
-          Matches
-        </Tag> */}
         <TagAnim
           style={{ backgroundColor: "#720000", fontSize: "50px", color: "#ffffff" }}
           delay={0.3}

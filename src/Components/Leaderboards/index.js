@@ -33,6 +33,7 @@ const Leaderboards = () => {
 
   useEffect(() => {
     if (matches.length < 1) {
+      console.log("load matches");
       setLoading(true);
 
       getDocs(matchesCollection)
@@ -53,7 +54,6 @@ const Leaderboards = () => {
   }, [matches, state]);
 
   const handleDrawerClose = () => {
-    console.log(`Table open ? ${drawerOpen}`);
     setDrawerOpen(!drawerOpen);
   };
 
@@ -103,31 +103,29 @@ const Leaderboards = () => {
           <CircularProgress />
         </div>
       ) : (
-        <div className="full_height_wrapper">
-          <div className="the_matches_wrapper">
-            <div className="left">
-              <div className="match_filters">
-                <div className="match_filters_box">
-                  <h5 className="tag">Filter Matches</h5>
-                  <div className="cont">
-                    {playedFilters.map((filter, index) => renderFilterOption(true, filter, index))}
-                  </div>
-                </div>
-                <div className="match_filters_box">
-                  <h5 className="tag">Filter Results</h5>
-                  <div className="cont">
-                    {resultFilters.map((filter, index) => renderFilterOption(false, filter, index))}
-                  </div>
+        <div className="the_matches_wrapper">
+          <div className="left">
+            <div className="match_filters">
+              <div className="match_filters_box">
+                <h5 className="tag">Filter Matches</h5>
+                <div className="cont">
+                  {playedFilters.map((filter, index) => renderFilterOption(true, filter, index))}
                 </div>
               </div>
-              {matches.length > 0 && <MatchesList matches={state.filteredMatches} />}
+              <div className="match_filters_box">
+                <h5 className="tag">Filter Results</h5>
+                <div className="cont">
+                  {resultFilters.map((filter, index) => renderFilterOption(false, filter, index))}
+                </div>
+              </div>
             </div>
-            <div className="right" style={{ pointerEvents: drawerOpen ? "auto" : "none" }}>
-              <IconButton aria-label="open table" onClick={handleDrawerClose}>
-                <MenuIcon fontSize="medium" />
-              </IconButton>
-              <LeagueTable isOpen={drawerOpen} onClose={handleDrawerClose} />
-            </div>
+            {matches.length > 0 && <MatchesList matches={state.filteredMatches} />}
+          </div>
+          <div className="right" style={{ pointerEvents: drawerOpen ? "auto" : "none" }}>
+            <IconButton aria-label="open table" onClick={handleDrawerClose}>
+              <MenuIcon fontSize="medium" />
+            </IconButton>
+            <LeagueTable isOpen={drawerOpen} onClose={handleDrawerClose} />
           </div>
         </div>
       )}

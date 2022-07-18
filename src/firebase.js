@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import { cityDb } from "./temp/m-city-export";
 
 const firebaseConfig = {
   apiKey: "AIzaSyApA0lAxx3Y8KzO1trV-wKXlUmqTgX3v9c",

@@ -40,10 +40,11 @@ const tableVariants = {
 const LeagueTable = ({ isOpen }) => {
   const [loading, setLoading] = useState(false);
   const [positions, setPositions] = useState([]);
-  const isTablet = useMediaQuery("(max-width:1024px)");
+  const isTablet = useMediaQuery("(max-width:960px)");
 
   useEffect(() => {
     if (positions.length < 1) {
+      console.log("load table");
       setLoading(true);
 
       getDocs(positionsCollection)
@@ -89,7 +90,7 @@ const LeagueTable = ({ isOpen }) => {
               <TableCell>Pts</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>{renderPositions()}</TableBody>
+          <TableBody>{!loading && renderPositions()}</TableBody>
         </Table>
       </div>
     </motion.div>

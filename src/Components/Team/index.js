@@ -28,7 +28,12 @@ const Team = () => {
     players
       .filter((player) => player.position === category)
       .map((player) => (
-        <Reveal key={player.id} keyframes={fadeInLeft(200)} triggerOnce>
+        <Reveal
+          key={player.id}
+          keyframes={fadeInLeft(200)}
+          style={{ boxSizing: "border-box", maxWidth: "100%" }}
+          triggerOnce
+        >
           <div className="item">
             <PlayerCardLarge
               number={player.number}
