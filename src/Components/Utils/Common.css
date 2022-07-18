@@ -60,14 +60,14 @@
 
 .match-block .match-wrapper .match-top .left .icon,
 .match-block .match-wrapper .match-bottom .left .icon {
-  width: 68px;
-  height: 44px;
+  width: 56px;
+  height: 38px;
   margin: 3px 0;
   background-size: cover !important;
 }
 .match-block .match-wrapper .match-top .left .team-name,
 .match-block .match-wrapper .match-bottom .left .team-name {
-  font-size: 30px;
+  font-size: 24px;
   padding: 6px 10px;
 }
 
@@ -76,9 +76,9 @@
   background: #310e1b;
   width: 70px;
   color: #ffffff;
-  font-size: 50px;
+  font-size: 42px;
   text-align: center;
-  padding-top: 6px;
+  padding-top: 8px;
 }
 
 .image_upload_container {
@@ -93,6 +93,26 @@
   padding: 2px;
   color: #c00;
   cursor: pointer;
+}
+
+@media screen and (min-width: 600px) {
+  .match-block .match-wrapper .match-top .left .icon,
+  .match-block .match-wrapper .match-bottom .left .icon {
+    width: 68px;
+    height: 44px;
+    margin: 3px 0;
+  }
+  .match-block .match-wrapper .match-top .left .team-name,
+  .match-block .match-wrapper .match-bottom .left .team-name {
+    font-size: 30px;
+    padding: 6px 10px;
+  }
+
+  .match-block .match-wrapper .match-top .right,
+  .match-block .match-wrapper .match-bottom .right {
+    font-size: 50px;
+    padding-top: 6px;
+  }
 }
 
 @media screen and (min-width: 960px) {

@@ -40,7 +40,7 @@ const tableVariants = {
 const LeagueTable = ({ isOpen }) => {
   const [loading, setLoading] = useState(false);
   const [positions, setPositions] = useState([]);
-  const isTablet = useMediaQuery("(max-width:960px)");
+  const isTablet = useMediaQuery("(max-width:1200px)");
 
   useEffect(() => {
     if (positions.length < 1) {

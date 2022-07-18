@@ -97,7 +97,8 @@
   color: #555;
 }
 .match_box_big .final-wrapper .final.np {
-  font-size: 1.2rem;
+  box-sizing: border-box;
+  font-size: 0.8rem;
   color: #555;
 }
 
@@ -234,6 +235,9 @@
     margin-right: 1.2rem;
     font-size: 1.45rem;
   }
+  .match_box_big .final-wrapper .final.np {
+    font-size: 1.2rem;
+  }
   .match_box_big .block .team {
     min-width: 10ch;
   }
@@ -260,7 +264,7 @@
   }
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 1200px) {
   .the_matches_wrapper .right {
     position: static;
   }

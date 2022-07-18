@@ -13,11 +13,11 @@
 
 .promotion_wrapper .promotion_animation .left {
   text-transform: uppercase;
-  font-size: 98px;
+  font-size: 86px;
   font-family: "Exo", sans-serif;
   flex-grow: 1;
   color: #ffffff;
-  line-height: 90px;
+  line-height: 80px;
 }
 .promotion_wrapper .promotion_animation .left span {
   display: block;
@@ -25,7 +25,7 @@
 
 .promotion_wrapper .promotion_animation .right {
   line-height: 90px;
-  margin-top: -32px;
+  margin-top: -28px;
 }
 
 .promotion_wrapper .promotion_animation .right div {
@@ -53,7 +53,8 @@
 }
 
 .promotion_wrapper .enroll_input {
-  width: 330px;
+  width: 100%;
+  max-width: 330px;
   margin: 0 auto;
   padding: 10px 0px;
 }

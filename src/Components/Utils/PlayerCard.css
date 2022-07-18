@@ -40,7 +40,7 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  column-gap: 30px;
+  column-gap: 20px;
   width: 100%;
   font-family: "Exo";
   color: #1b1b1b;
@@ -49,7 +49,7 @@
 
 .player-card-lg-img-wrapper {
   box-sizing: border-box;
-  width: 136px;
+  width: 100px;
   flex: 0 1 auto;
   display: flex;
   flex-direction: column;
@@ -60,12 +60,17 @@
   background-position: -2px 0px;
 }
 
+.player-card-lg-img-wrapper .player-card-img {
+  width: 64px;
+  height: 64px;
+}
+
 .player-card-lg-number {
   display: inline-block;
   margin: 0;
   margin-left: -1em;
   font-family: "Exo";
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 800;
   color: #efefef;
 }
@@ -77,8 +82,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  max-width: calc(100% - 166px);
-  font-size: 32px;
+  max-width: calc(100% - 120px);
+  font-size: 26px;
 }
 
 .player-card-content-wrapper > h5,
@@ -111,9 +116,21 @@
   .player-card-lg-wrapper {
     column-gap: 25px;
   }
+  .player-card-lg-img-wrapper {
+    width: 136px;
+    padding: 16px 20px;
+  }
+  .player-card-lg-img-wrapper .player-card-img {
+    width: 88px;
+    height: 88px;
+  }
+  .player-card-lg-number {
+    font-size: 32px;
+  }
   .player-card-content-wrapper {
     max-width: none;
     padding-right: 30px;
+    font-size: 32px;
   }
 }
 
@@ -121,6 +138,7 @@
   .player-card-lg-wrapper {
     width: auto;
     min-width: 300px;
+    column-gap: 30px;
     flex-direction: column;
   }
   .player-card-lg-img-wrapper {

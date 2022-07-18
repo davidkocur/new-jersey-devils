@@ -53,7 +53,7 @@ const Leaderboards = () => {
     }
   }, [matches, state]);
 
-  const handleDrawerClose = () => {
+  const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
 
@@ -122,10 +122,10 @@ const Leaderboards = () => {
             {matches.length > 0 && <MatchesList matches={state.filteredMatches} />}
           </div>
           <div className="right" style={{ pointerEvents: drawerOpen ? "auto" : "none" }}>
-            <IconButton aria-label="open table" onClick={handleDrawerClose}>
+            <IconButton aria-label="open table" onClick={toggleDrawer}>
               <MenuIcon fontSize="medium" />
             </IconButton>
-            <LeagueTable isOpen={drawerOpen} onClose={handleDrawerClose} />
+            <LeagueTable isOpen={drawerOpen} onClose={() => setDrawerOpen(false)} />
           </div>
         </div>
       )}

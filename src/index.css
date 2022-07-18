@@ -14,6 +14,11 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+#root {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -133,8 +138,8 @@ li {
 }
 
 .full_height_wrapper {
-  margin-top: 104px;
-  min-height: calc(100vh - 277px);
+  margin-top: 96px;
+  min-height: calc(100vh - 269px);
 }
 
 .not_found_container {
