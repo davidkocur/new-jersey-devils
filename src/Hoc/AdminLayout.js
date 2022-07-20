@@ -6,7 +6,7 @@ import "./Admin.css";
 const AdminLayout = ({ children, title }) => {
   return (
     <div className="admin_container">
-      <div className="admin_left_nav">
+      <div className="admin_left_nav full_content_height">
         <AdminNav />
       </div>
       <div className="admin_right">

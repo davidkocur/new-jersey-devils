@@ -5,8 +5,8 @@ import { initializeFirebase } from "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { StoreProvider, useStore } from "./Helpers/Store";
 import { initialState, setUser, userStateReducer } from "./Helpers/userStateReducer";
-import { LocalizationProvider } from "@mui/lab";
-import DateAdapter from "@mui/lab/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns as DateAdapter } from "@mui/x-date-pickers/AdapterDateFns";
 import localeSK from "date-fns/locale/sk";
 
 import "./index.css";
@@ -27,6 +27,11 @@ const App = ({ children }) => {
         lg: 1200,
       },
     },
+    palette: {
+      neutral: {
+        main: "#424242",
+      },
+    },
   });
 
   useEffect(() => {
@@ -43,7 +48,7 @@ const App = ({ children }) => {
 ReactDOM.render(
   <React.StrictMode>
     <StoreProvider reducer={userStateReducer} initialState={initialState}>
-      <LocalizationProvider dateAdapter={DateAdapter} locale={localeSK}>
+      <LocalizationProvider dateAdapter={DateAdapter} adapterLocale={localeSK}>
         <App>
           <AppRoutes />
         </App>

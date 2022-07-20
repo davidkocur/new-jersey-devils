@@ -23,7 +23,7 @@ import {
 } from "../../Utils/Common";
 import { getDocs, doc, getDoc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { teamsCollection, matchesCollection } from "../../../firebase";
-import { DatePicker } from "@mui/lab";
+import { DatePicker } from "@mui/x-date-pickers";
 import { formatISO, isToday, isFuture } from "date-fns";
 
 const defaultFormValues = {
@@ -226,7 +226,7 @@ const AddEditMatch = () => {
                 id="date"
                 name="date"
                 type="date"
-                mask="__.__.____"
+                inputFormat="dd. MM. RRRR"
                 value={formik.values.date}
                 onChange={(value) => {
                   if (typeof value === "undefined" || value === null) return;

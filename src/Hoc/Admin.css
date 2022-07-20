@@ -22,7 +22,6 @@
 }
 
 .admin_container .admin_left_nav {
-  min-height: 100vh;
   padding-top: 1.4rem;
   background: #282828;
   border-right: 2px solid #01285e;
