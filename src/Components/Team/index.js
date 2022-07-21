@@ -44,9 +44,8 @@ const Team = () => {
           </div>
         </Reveal>
       ));
-
   return (
-    <div className="the_team_container">
+    <div className="full_height_wrapper  the_team_container">
       {loading ? (
         <div className="progress_full">
           <CircularProgress />

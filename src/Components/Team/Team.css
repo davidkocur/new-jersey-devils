@@ -1,8 +1,6 @@
 .the_team_container {
   background-color: #111111;
-  margin-top: 96px;
   padding: 20px;
-  min-height: 100vh;
 }
 
 .team_category_wrapper .title {

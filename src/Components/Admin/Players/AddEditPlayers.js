@@ -105,7 +105,7 @@ const AddEditPlayers = () => {
     onSubmit: (values) => submitForm(values),
   });
 
-  console.log("AddEditPlayers-RENDER");
+  // console.log("AddEditPlayers-RENDER");
 
   const submitForm = (values) => {
     setLoading(true);

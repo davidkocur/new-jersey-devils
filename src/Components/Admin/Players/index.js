@@ -29,21 +29,31 @@ const styles = {
   },
 };
 
+const getSorted = (players, sort) => {
+  const [sortProp, desc] = sort?.split(":") ?? [];
+
+  if (sortProp === "number") {
+    return players.sort((a, b) => {
+      return desc ? b[sortProp] - a[sortProp] : a[sortProp] - b[sortProp];
+    });
+  } else {
+    return players.sort((a, b) => {
+      return desc
+        ? b[sortProp]?.localeCompare(a[sortProp])
+        : a[sortProp]?.localeCompare(b[sortProp]);
+    });
+  }
+};
+
 const AdminPlayers = () => {
   const [hasMoreData, setHasMoreData] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [lastLoaded, setLastLoaded] = useState(null);
   const [players, setPlayers] = useState(null);
+  const [sortedPlayers, setSortedPlayers] = useState([]);
 
   const [searchParams] = useSearchParams();
   const sort = searchParams.get("sort");
-  const [sortProp, desc] = sort?.split(":") ?? [];
-
-  const sortPlayers = (a, b) => {
-    return desc ? b[sortProp]?.localeCompare(a[sortProp]) : a[sortProp]?.localeCompare(b[sortProp]);
-  };
-
-  const sortedPlayers = [...(players ?? [])].sort(sortPlayers);
 
   const handleLoadClick = () => {
     if (lastLoaded === null) {
@@ -58,7 +68,9 @@ const AdminPlayers = () => {
 
     const qrParams = [limit(reqLimit)];
     if (lastLoadedPlayer) qrParams.push(startAfter(lastLoadedPlayer));
+
     const qr = query(playersCollection, ...qrParams);
+
     getDocs(qr)
       .then(({ docs }) => {
         const lastLoaded = docs[docs.length - 1];
@@ -67,8 +79,10 @@ const AdminPlayers = () => {
           id: doc.id,
         }));
         setLastLoaded(lastLoaded);
+
         if (players === null) setPlayers(newPlayers);
         else setPlayers((players) => [...players, ...newPlayers]);
+
         if (!lastLoaded) {
           setHasMoreData(false);
           showToastError("No further data available");
@@ -77,6 +91,11 @@ const AdminPlayers = () => {
       .catch((err) => showToastError(err))
       .finally(() => setIsLoading(false));
   };
+
+  useEffect(() => {
+    if (players === null) return;
+    setSortedPlayers(getSorted([...players], sort));
+  }, [sort, players]);
 
   useEffect(() => {
     if (players !== null) return;
@@ -123,10 +142,9 @@ const AdminPlayers = () => {
                 </SortableColumnTitle>
               </TableCell>
               <TableCell>
-                {/* <SortableColumnTitle sort={sort} columnName="number" disabled={isLoading}>
+                <SortableColumnTitle sort={sort} columnName="number" disabled={isLoading}>
                   Number
-                </SortableColumnTitle> */}
-                Number
+                </SortableColumnTitle>
               </TableCell>
               <TableCell>
                 <SortableColumnTitle sort={sort} columnName="position" disabled={isLoading}>
@@ -135,9 +153,8 @@ const AdminPlayers = () => {
               </TableCell>
             </TableRow>
           </TableHead>
-          {sortedPlayers && (
-            <TableBody>{sortedPlayers.map((player) => renderPlayerRow(player))}</TableBody>
-          )}
+
+          <TableBody>{sortedPlayers.map((player) => renderPlayerRow(player))}</TableBody>
         </Table>
       </Paper>
       <Button

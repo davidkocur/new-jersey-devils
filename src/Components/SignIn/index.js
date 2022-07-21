@@ -29,7 +29,6 @@ const SignIn = () => {
         .min(6, "Password must have at least 6 characters"),
     }),
     onSubmit: (values) => {
-      // console.log(values);
       setLoading(true);
       submitForm(values);
     },
