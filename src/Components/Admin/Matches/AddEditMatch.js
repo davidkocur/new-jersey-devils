@@ -63,6 +63,7 @@ const AddEditMatch = () => {
       if (values.local === team.shortName) dataToSubmit.localThmb = team.thmb;
     });
     dataToSubmit.played = values.final !== "np";
+    dataToSubmit.home = values.local === "Devils" ? true : false;
 
     if (values.away === values.local) {
       showToastError("You can't have same team on both sides !");
