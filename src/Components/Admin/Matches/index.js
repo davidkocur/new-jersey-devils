@@ -25,7 +25,7 @@ const numSort = (a, b, prop, desc) => {
 };
 
 const numSort2 = (a, b, propA, propB, desc) => {
-  return desc ? a[propB] - b[propA] : b[propA] - a[propB];
+  return desc ? a[propA] - b[propB] : b[propB] - a[propA];
 };
 
 const matchStateSort = (a, b, desc) => {
