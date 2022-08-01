@@ -44,6 +44,11 @@ const messages = {
   wrongNumber: "Please enter valid number",
 };
 
+const minDate = new Date();
+minDate.setFullYear(minDate.getFullYear() - 2);
+const maxDate = new Date();
+maxDate.setFullYear(maxDate.getFullYear() + 2);
+
 const AddEditMatch = () => {
   const [loading, setLoading] = useState(false);
   const [isDialogOpen, setDialogOpen] = useState(false);
@@ -227,16 +232,25 @@ const AddEditMatch = () => {
                 id="date"
                 name="date"
                 type="date"
-                inputFormat="dd. MM. RRRR"
+                inputFormat="dd. MM. yyyy"
                 value={formik.values.date}
                 onChange={(value) => {
                   if (typeof value === "undefined" || value === null) return;
                   if (isNaN(value.getTime())) return;
+                  if (value.getTime() < minDate.getTime() || value.getTime() > maxDate.getTime()) {
+                    formik.setFieldError("date", "Date cannot be more than 2 years in future/past");
+                    return;
+                  }
+                  formik.setFieldError("date", null);
                   formik.setFieldValue("date", formatISO(value, { representation: "date" }));
                   onDateChanged(value);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} {...formikTextErrorHelper(formik, "date")} />
+                  <TextField
+                    {...params}
+                    sx={{ ".MuiFormHelperText-root": { color: "error.main" } }}
+                    {...formikTextErrorHelper(formik, "date")}
+                  />
                 )}
               />
             </FormControl>

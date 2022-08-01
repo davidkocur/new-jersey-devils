@@ -27,11 +27,11 @@ export const TeamLogo = ({ linkTo, width, height }) => {
 };
 
 export const showToastError = (message) => {
-  toast.error(message, { position: toast.POSITION.TOP_LEFT });
+  toast.error(message, { position: toast.POSITION.BOTTOM_RIGHT });
 };
 
 export const showToastSuccess = (message) => {
-  toast.success(message, { position: toast.POSITION.TOP_LEFT });
+  toast.success(message, { position: toast.POSITION.BOTTOM_RIGHT });
 };
 
 export const Tag = ({ children, linkTo, style, className }) => {
