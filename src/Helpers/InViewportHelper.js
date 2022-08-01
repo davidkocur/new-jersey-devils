@@ -1,11 +1,14 @@
 let lastObservedID = 0;
 let safeIDs = [];
+
 const getNewID = () => {
   if (safeIDs.length > 0) return safeIDs.pop();
   lastObservedID++;
   return `observe${lastObservedID}`;
 };
+
 const observedElements = {};
+
 const observer = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
